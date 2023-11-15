@@ -10,7 +10,10 @@ const Login = () => {
     <div>
       {authContext?.authenticated
         ? <button onClick={() => authContext.logout()}>{authContext.loggedUserId}</button>
-        : <button onClick={() => authContext?.loginWithGoogle()}>login</button>}
+        : <div>
+            <button onClick={() => authContext?.loginWithGoogle()}>login google</button>
+            <button onClick={() => authContext?.registerWithEmailAndPassword('ad@asd.cz', 'asdasd')}>register e/p</button>
+          </div>}
     </div>
   )
 }

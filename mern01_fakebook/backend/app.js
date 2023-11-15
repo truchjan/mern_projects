@@ -20,7 +20,7 @@ app.use(cors(corsOptions))
 // turn off authentication for test environment
 // comment following 3 lines to turn off authentication for BE - will break FE though
 if(process.env.NODE_ENV !== 'test') {
-  app.use(verifytoken) // every route after this line will use verifyjwt
+  // app.use(verifytoken) // every route after this line will use verifyjwt
 }
 
 app.use('/auth', require('./src/routes/authRoutes'))
