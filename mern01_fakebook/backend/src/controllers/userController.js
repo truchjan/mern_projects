@@ -2,13 +2,13 @@ const asyncHandler = require("express-async-handler")
 const User = require('../models/user')
 
 exports.userList = asyncHandler(async (req, res, next) => {
-  const users = await User.find().sort({ name: 1 })
+  const users = await User.find().sort({ name: 1 }).populate('posts')
   res.json(users)
 })
 
 exports.userDetail = asyncHandler(async (req, res, next) => {
   try {
-    const user = await User.findById(req.params.id)
+    const user = await User.findById(req.params.id).populate('posts')
     if(user) {
       res.json(user)
     } else {

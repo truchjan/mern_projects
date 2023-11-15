@@ -18,4 +18,19 @@ const CommentSchema = mongoose.Schema({
   }
 }, {timestamps: true})
 
+CommentSchema.set('toJSON', {
+  transform: (doc, ret) => {
+    delete ret.__v
+    delete ret.id
+  }
+})
+
+CommentSchema.set('toObject', {
+  transform: (doc, ret) => {
+    delete ret.__v
+    delete ret.id
+  }
+})
+
+
 module.exports = mongoose.model('Comment', CommentSchema)
