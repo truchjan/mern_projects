@@ -20,7 +20,7 @@ exports.postDetail = asyncHandler(async (req, res, next) => {
   }
 })
 
-// TODO - postman example - {"text": "hello, this is interesting post", "user": "6553ae15a9cec3cf36a90ef8"}
+// postman example - {"text": "hello, this is interesting post", "user": "6553ae15a9cec3cf36a90ef8"}
 exports.createPost = asyncHandler(async (req, res, next) => {
   try {
     const user = await User.findById(req.body.user)
