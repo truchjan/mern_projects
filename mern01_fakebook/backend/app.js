@@ -25,7 +25,7 @@ if(process.env.NODE_ENV !== 'test') {
 
 app.use('/auth', require('./src/routes/authRoutes'))
 app.use('/api/users', require('./src/routes/userRoutes'))
-// app.use('/api/posts', require('./src/routes/postRoutes'))
-// app.use('/api/comments', require('./src/routes/commentRoutes'))
+app.use('/api/posts', require('./src/routes/postRoutes'))
+app.use('/api/comments', require('./src/routes/commentRoutes'))
 
 module.exports = app

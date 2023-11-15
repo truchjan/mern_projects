@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const Post = require('./post')
 
 const UserSchema = mongoose.Schema({
   name: {
@@ -57,5 +58,34 @@ const UserSchema = mongoose.Schema({
     }
   ]
 }, {timestamps: true})
+
+UserSchema.virtual('posts', {
+  ref: Post,
+  localField: '_id',
+  foreignField: 'user'
+})
+
+UserSchema.virtual('requestedFriends', {
+  ref: 'User',
+  localField: '_id',
+  foreignField: 'friendRequests.user'
+})
+
+// to actualy get virtuals in JSON, call populate(wanted virtuals) while finding them in controller
+UserSchema.set('toJSON', {
+  virtuals: true,
+  transform: (doc, ret) => {
+    delete ret.__v
+    delete ret.id
+  }
+})
+
+UserSchema.set('toObject', {
+  virtuals: true,
+  transform: (doc, ret) => {
+    delete ret.__v
+    delete ret.id
+  }
+})
 
 module.exports = mongoose.model('User', UserSchema)

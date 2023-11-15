@@ -1,5 +1,5 @@
 const mongoose = require("mongoose")
-// const Comment = require('./comment')
+const Comment = require('./comment')
 
 const PostSchema = mongoose.Schema({
   text: {
@@ -20,27 +20,33 @@ const PostSchema = mongoose.Schema({
   ]
 }, {timestamps: true})
 
-// PostSchema.virtual('comments', {
-//   ref: Comment,
-//   localField: '_id',
-//   foreignField: 'post',
-// })
+PostSchema.virtual('comments', {
+  ref: Comment,
+  localField: '_id',
+  foreignField: 'post',
+})
 
-// PostSchema.virtual('commentCount', {
-//   ref: Comment,
-//   localField: '_id',
-//   foreignField: 'post',
-//   count: true,
-// })
+PostSchema.virtual('commentCount', {
+  ref: Comment,
+  localField: '_id',
+  foreignField: 'post',
+  count: true,
+})
 
-// // TODO - funguje? smazat asi ten if řádek, nechápu co dělá
-// PostSchema.set('toJSON', {
-//   virtuals: true,
-//   transform: (doc, ret) => {
-//     if (!ret.id && ret._id) ret.id = ret._id.toString()
-//     delete ret._id
-//     delete ret.__v
-//   }
-// })
+PostSchema.set('toJSON', {
+  virtuals: true,
+  transform: (doc, ret) => {
+    delete ret.__v
+    delete ret.id
+  }
+})
+
+PostSchema.set('toObject', {
+  virtuals: true,
+  transform: (doc, ret) => {
+    delete ret.__v
+    delete ret.id
+  }
+})
 
 module.exports = mongoose.model('Post', PostSchema)
