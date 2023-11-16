@@ -8,4 +8,14 @@ router.get("/", userController.userList)
 
 router.put("/:id", userController.updateUserDetail)
 
+router.put("/sendfriendrequest/:id", userController.sendFriendRequest)
+
+router.put("/cancelfriendrequest/:id", userController.cancelFriendRequest)
+
+router.put("/acceptfriendrequest/:id", userController.acceptFriendRequest)
+
+router.put("/rejectfriendrequest/:id", userController.rejectFriendRequest)
+
+router.put("/removefriend/:id", userController.removeFriend)
+
 module.exports = router
