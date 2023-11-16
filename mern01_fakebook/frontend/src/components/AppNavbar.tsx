@@ -8,23 +8,27 @@ const AppNavbar = () => {
   const navigate = useNavigate()
   const authContext = useContext(AuthContext)
 
-  const linkStyle = "mx-3 my-4 text-lg no-underline text-blue-500 hover:text-blue-800"
 
   return (
     <div>
-      <div className={"bg-gray-200 h-12 flex items-center justify-between"}>
-        <div>
-          <Link to={`${PATH_USERS}/${authContext?.loggedUserId}`} className={linkStyle}>My profile</Link>
-          <Link to={PATH_DASHBOARD} className={linkStyle}>Dashboard</Link>
+      <div className={"bg-gradient-to-r from-indigo-200 to-purple-300 h-16 flex items-center justify-between"}>
+
+        <div className="rotate-6">
+          <Link to={PATH_DASHBOARD} className="mx-3 my-4 text-xl no-underline text-black hover:bg-black hover:text-white p-2 rounded-lg">Fakebook</Link>
         </div>
-        <button onClick={() => { 
-          authContext?.logout().then(() => navigate('/'))            
-          }} className="mx-2 w-16 h-8 border rounded-md bg-blue-500 cursor-pointer">Logout</button>
+
+        <div className="flex items-center">
+          <Link to={`${PATH_USERS}/${authContext?.loggedUserId}`}>
+            <img className="w-8 rounded-full hover:bg-black p-1" src={authContext?.loggedUserImageURL!} alt="profile picture" />
+          </Link>
+
+          <button onClick={() => { 
+            authContext?.logout().then(() => navigate('/'))            
+            }} className="mx-2 font-montserrat text-lg rounded-lg border-none bg-transparent cursor-pointer hover:bg-black hover:text-white">Logout</button>
+        </div>
+
       </div>
       <Outlet />
-      <div className={"bg-gray-200 h-12 flex items-center justify-end"}>
-        <p className="mx-4 text-sm">by <a href="https://github.com/truchjan" target="_blank" className="no-underline text-blue-500 hover:text-blue-800">@truchjan</a></p>
-      </div>
     </div>
   )
 }

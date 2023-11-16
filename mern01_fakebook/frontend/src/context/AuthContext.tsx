@@ -16,8 +16,10 @@ type AuthContextProviderProps = {
 type AuthContextType = {
   authenticated: boolean | null,
   loggedUserId: string | null,
-  setAuthenticated : React.Dispatch<React.SetStateAction<boolean>>,
-  setLoggedUserId : React.Dispatch<React.SetStateAction<string>>,
+  loggedUserImageURL: string | null,
+  setAuthenticated: React.Dispatch<React.SetStateAction<boolean>>,
+  setLoggedUserId: React.Dispatch<React.SetStateAction<string>>,
+  setLoggedUserImageURL: React.Dispatch<React.SetStateAction<string>>,
   loginWithGoogle: () => Promise<void>,
   loginWithEmailAndPassword: (email: string, password: string) => Promise<void>,
   registerWithEmailAndPassword: (email: string, password: string) => Promise<void>,
@@ -31,6 +33,7 @@ export const AuthContextProvider = ({children}: AuthContextProviderProps) => {
 
   const [authenticated, setAuthenticated] = useState(false)
   const [loggedUserId, setLoggedUserId] = useState('')
+  const [loggedUserImageURL, setLoggedUserImageURL] = useState('')
 
   const firebaseAuth = getAuth(app)
   const provider = new GoogleAuthProvider()
@@ -43,6 +46,7 @@ export const AuthContextProvider = ({children}: AuthContextProviderProps) => {
           
           AuthService.validateUser(token).then(data => {
             setLoggedUserId(data.user._id)
+            setLoggedUserImageURL(data.user.imageURL)
             setAccessToken(token)
             setAuthenticated(true)
             localStorage.setItem('loggedIn', 'true')
@@ -80,7 +84,8 @@ export const AuthContextProvider = ({children}: AuthContextProviderProps) => {
   }
 
   return (
-      <AuthContext.Provider value={{authenticated, setAuthenticated, loggedUserId, setLoggedUserId, loginWithGoogle, loginWithEmailAndPassword, registerWithEmailAndPassword, sendPasswordReset, logout}}>
+      <AuthContext.Provider value={{authenticated, setAuthenticated, loggedUserId, setLoggedUserId, loggedUserImageURL, setLoggedUserImageURL,
+          loginWithGoogle, loginWithEmailAndPassword, registerWithEmailAndPassword, sendPasswordReset, logout}}>
         {children}
       </AuthContext.Provider>
   )
