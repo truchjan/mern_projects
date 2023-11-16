@@ -13,6 +13,8 @@ router.put("/:id", postController.updatePost)
 
 router.delete("/:id", postController.deletePost)
 
-// TODO 1.put-likePost, 2.put-unlikePost
+router.put("/addlike/:id", postController.addLike)
+
+router.put("/removelike/:id", postController.removeLike)
 
 module.exports = router
