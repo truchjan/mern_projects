@@ -9,5 +9,6 @@ export interface PostModel {
   createdAt: Date,
   updatedAt: Date,
   comments: CommentModel[],
-  commentCount: number
+  commentCount: number,
+  likesCount: number
 }

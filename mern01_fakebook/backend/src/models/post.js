@@ -33,6 +33,10 @@ PostSchema.virtual('commentCount', {
   count: true,
 })
 
+PostSchema.virtual('likesCount').get(function() {
+  return this.likes.length
+})
+
 PostSchema.set('toJSON', {
   virtuals: true,
   transform: (doc, ret) => {

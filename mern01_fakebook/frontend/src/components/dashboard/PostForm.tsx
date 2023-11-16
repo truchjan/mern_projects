@@ -24,7 +24,7 @@ const PostForm = (props: PostListProps) => {
 
   const onSubmit = (data: any) => {
     if(props.create) {
-      PostService.createPost(authContext?.loggedUserId!, data).then(item => {
+      PostService.createPost(authContext?.loggedUser?._id!, data).then(item => {
         props.setPosts([item!, ...props.posts])
         reset()
       })
@@ -37,14 +37,17 @@ const PostForm = (props: PostListProps) => {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={"flex flex-col w-full max-w-xl items-center"}>
+    <form onSubmit={handleSubmit(onSubmit)} className={"flex flex-col w-full max-w-xl items-center shadow-[0_0_10px_0px_rgb(0,0,0,0.3)] rounded-xl bg-white"}>
 
-      <textarea className={"border border-black rounded-md mt-2 p-2 h-16 w-11/12"}
-          {...register("text", {required: "This field is required"})}
+      <textarea className={"border-none resize-none mt-2 p-2 h-16 w-11/12 focus:outline-none font-montserrat"}
+        placeholder="What's on your mind?"
+        {...register("text", {required: "This field is required"})}
       />
       {errors.text && <p className="text-rose-500">{errors.text.message}</p>}
 
-      <input type="submit" className={"my-2 w-16 h-8 border rounded-md bg-blue-500 cursor-pointer"} />
+      <button type="submit" className={"my-2 w-16 h-8 border-none rounded-xl bg-indigo-300 cursor-pointer font-montserrat font-bold hover:bg-black hover:text-white"}>
+        Post
+      </button>
     </form>
   )
 }

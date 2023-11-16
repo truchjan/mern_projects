@@ -3,6 +3,7 @@ import { createContext, useState, useEffect } from "react"
 import { AuthService } from "@/service/authService"
 import { setAccessToken } from "@/utils/accessTokenStorage"
 import { app } from "@/config/firebaseConfig"
+import { UserModel } from "@/model/userModel"
 
 // IMPORTANT NOTES:
 // localStorage('loggedIn') is 'false' or 'true' and keeps record if user is logged in and should try to authenticate when page is reloaded
@@ -15,11 +16,9 @@ type AuthContextProviderProps = {
 
 type AuthContextType = {
   authenticated: boolean | null,
-  loggedUserId: string | null,
-  loggedUserImageURL: string | null,
+  loggedUser: UserModel | null | undefined,
   setAuthenticated: React.Dispatch<React.SetStateAction<boolean>>,
-  setLoggedUserId: React.Dispatch<React.SetStateAction<string>>,
-  setLoggedUserImageURL: React.Dispatch<React.SetStateAction<string>>,
+  setLoggedUser: React.Dispatch<React.SetStateAction<UserModel | null | undefined>>,
   loginWithGoogle: () => Promise<void>,
   loginWithEmailAndPassword: (email: string, password: string) => Promise<void>,
   registerWithEmailAndPassword: (email: string, password: string) => Promise<void>,
@@ -32,8 +31,7 @@ export const AuthContext = createContext<AuthContextType | null>(null)
 export const AuthContextProvider = ({children}: AuthContextProviderProps) => {
 
   const [authenticated, setAuthenticated] = useState(false)
-  const [loggedUserId, setLoggedUserId] = useState('')
-  const [loggedUserImageURL, setLoggedUserImageURL] = useState('')
+  const [loggedUser, setLoggedUser] = useState<UserModel | null | undefined>()
 
   const firebaseAuth = getAuth(app)
   const provider = new GoogleAuthProvider()
@@ -45,8 +43,7 @@ export const AuthContextProvider = ({children}: AuthContextProviderProps) => {
         userCredentials.getIdToken().then(token => {
           
           AuthService.validateUser(token).then(data => {
-            setLoggedUserId(data.user._id)
-            setLoggedUserImageURL(data.user.imageURL)
+            setLoggedUser(data.user)
             setAccessToken(token)
             setAuthenticated(true)
             localStorage.setItem('loggedIn', 'true')
@@ -84,7 +81,7 @@ export const AuthContextProvider = ({children}: AuthContextProviderProps) => {
   }
 
   return (
-      <AuthContext.Provider value={{authenticated, setAuthenticated, loggedUserId, setLoggedUserId, loggedUserImageURL, setLoggedUserImageURL,
+      <AuthContext.Provider value={{authenticated, setAuthenticated, loggedUser, setLoggedUser,
           loginWithGoogle, loginWithEmailAndPassword, registerWithEmailAndPassword, sendPasswordReset, logout}}>
         {children}
       </AuthContext.Provider>
