@@ -1,19 +1,111 @@
-import { useContext } from "react"
+// import { useContext } from "react"
+// import { AuthContext } from "@/context/AuthContext"
+
+// // remove user must be done manualy from mongodb as well as firebase->Authentication->Users
+// const Login = () => {
+
+//   const authContext = useContext(AuthContext)
+
+//   return (
+//     <div>
+//       {authContext?.authenticated
+//         ? <button onClick={() => authContext.logout()}>{authContext.loggedUserId}</button>
+//         : <div>
+//             <button onClick={() => authContext?.loginWithGoogle()}>login google</button>
+//             <button onClick={() => authContext?.registerWithEmailAndPassword('ad@asd.cz', 'asdasd')}>register e/p</button>
+//           </div>}
+//     </div>
+//   )
+// }
+
+// export default Login
+import { useEffect, useContext, useState } from "react"
 import { AuthContext } from "@/context/AuthContext"
+import { useNavigate } from "react-router-dom"
+import { PATH_DASHBOARD, PATH_RESET_PASSWORD } from "@/components/MainRouter"
+import { useForm } from "react-hook-form"
+import { BsGoogle } from "react-icons/bs"
 
 // remove user must be done manualy from mongodb as well as firebase->Authentication->Users
 const Login = () => {
 
   const authContext = useContext(AuthContext)
+  const navigate = useNavigate()
+  const [error, setError] = useState<string>()
+  const [isSignup, setIsSignup] = useState(false)
+
+  useEffect(() => {
+    if(authContext?.authenticated) {
+      navigate(PATH_DASHBOARD)
+    }
+  }, [authContext?.authenticated])
+
+  const {register, handleSubmit, formState: {errors}} = useForm({
+    defaultValues: {
+      email: "",
+      password: ""
+    }
+  })
+
+  const onSubmit = (data: any) => {
+    if(isSignup) {
+      authContext?.registerWithEmailAndPassword(data.email, data.password).then().catch(err => {
+        if(err.toString().startsWith('FirebaseError: Firebase: Error (auth/email-already-in-use)')) setError('Email already in use')
+        if(err.toString().startsWith('FirebaseError: Firebase: Password should be at least 6 characters')) setError('Password should be at least 6 characters')
+      })
+    } else {
+      authContext?.loginWithEmailAndPassword(data.email, data.password).then().catch(() => {
+        setError('Invalid login credentials')
+      })
+    }
+  }
 
   return (
-    <div>
-      {authContext?.authenticated
-        ? <button onClick={() => authContext.logout()}>{authContext.loggedUserId}</button>
-        : <div>
-            <button onClick={() => authContext?.loginWithGoogle()}>login google</button>
-            <button onClick={() => authContext?.registerWithEmailAndPassword('ad@asd.cz', 'asdasd')}>register e/p</button>
-          </div>}
+    <div className="flex flex-col items-center justify-center h-screen bg-gradient-to-r from-indigo-200 to-purple-300">
+      <div className="flex flex-col p-4 items-center shadow-[0_0_10px_3px_rgb(0,0,0,0.3)] rounded-xl max-w-sm w-1/2">
+
+        <h1 className="rotate-6 mb-8">Fakebook</h1>
+
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col w-full">
+
+          <p className="mx-2 my-0">Email</p>
+          <input type="email" className="border border-black rounded-2xl m-2 p-2 bg-indigo-100"
+              {...register("email", {required: "This field is required"})}
+          />
+          {errors.email && <p className="mx-2 my-0 text-rose-600 text-sm">{errors.email.message}</p>}
+
+          <p className="mx-2 mt-4 mb-0">Password</p>
+          <input type="password" className="border border-black rounded-2xl m-2 p-2 bg-indigo-100"
+                {...register("password", {required: "This field is required"})}
+          />
+          {errors.password && <p className="mx-2 my-0 text-rose-600 text-sm">{errors.password.message}</p>}
+
+          <button type="submit" className="mb-2 mt-4 mx-2 h-8 border rounded-2xl bg-transparent cursor-pointer hover:bg-black hover:text-white font-montserrat font-bold">
+            {isSignup ? 'Sign up' : 'Log in'}
+          </button>
+          {error && <p className="mx-2 my-0 text-rose-600 text-sm">{error}</p>}
+        </form>
+
+        <p className="mt-4 mb-0 cursor-pointer hover:underline text-xs" onClick={() => navigate(PATH_RESET_PASSWORD)}>Forgot password?</p>
+
+        <div className="flex flex-col w-full">
+
+          <button className="mt-4 mx-2 h-8 border rounded-2xl bg-transparent cursor-pointer hover:bg-black hover:text-white font-montserrat font-bold"
+            onClick={() => setIsSignup(prev => !prev)}>
+              {isSignup ? 'Log in' : 'Sign up with Email'}
+          </button>
+
+          <button className="mt-2 mx-2 h-8 border rounded-2xl bg-transparent cursor-pointer hover:bg-black hover:text-white font-montserrat font-bold"
+            onClick={() => authContext?.loginWithGoogle()}>
+              <div className="flex justify-center items-center">
+                <BsGoogle />
+                <p className="m-0 ml-2">Login with Google</p>
+              </div>
+          </button>
+          
+        </div>
+      </div>
+      
     </div>
   )
 }
