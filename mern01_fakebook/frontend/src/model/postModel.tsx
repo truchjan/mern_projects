@@ -4,7 +4,7 @@ import { CommentModel } from "@/model/commentModel"
 export interface PostModel {
   _id?: string,
   text: string,
-  user: UserModel,
+  user?: UserModel,
   likes: UserModel[],
   createdAt: Date,
   updatedAt: Date,
