@@ -12,8 +12,10 @@ router.put("/sendfriendrequest/:id", userController.sendFriendRequest)
 
 router.put("/cancelfriendrequest/:id", userController.cancelFriendRequest)
 
-// TODO router.put("/acceptfriendrequest/:id", userController.acceptFriendRequest)
+router.put("/acceptfriendrequest/:id", userController.acceptFriendRequest)
 
-// TODO router.put("/rejectfriendrequest/:id", userController.rejectFriendRequest)
+router.put("/rejectfriendrequest/:id", userController.rejectFriendRequest)
+
+router.put("/removefriend/:id", userController.removeFriend)
 
 module.exports = router

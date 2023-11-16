@@ -2,13 +2,13 @@ const asyncHandler = require("express-async-handler")
 const User = require('../models/user')
 
 exports.userList = asyncHandler(async (req, res, next) => {
-  const users = await User.find().sort({ name: 1 }).populate('posts requestedFriends')
+  const users = await User.find().sort({ name: 1 }).populate('friends posts requestedFriends')
   res.json(users)
 })
 
 exports.userDetail = asyncHandler(async (req, res, next) => {
   try {
-    const user = await User.findById(req.params.id).populate('posts requestedFriends')
+    const user = await User.findById(req.params.id).populate('friends posts requestedFriends')
     if(user) {
       res.json(user)
     } else {
@@ -41,14 +41,22 @@ exports.updateUserDetail = asyncHandler(async (req, res, next) => {
   }
 })
 
-// todo - ověření, zda už nebyl request poslán nebo zda už nejsou přátelé
 exports.sendFriendRequest = asyncHandler(async (req, res, next) => {
   try {
     const sender = await User.findById(req.params.id)
     const reciever = await User.findById(req.body.user)
-    const datenow = Date.now()
     if(!sender || !reciever) throw new Error("User not found")
 
+    const alreadyFriends = sender.friends.find(item => item._id.equals(reciever._id))
+    if(alreadyFriends) throw new Error("Already friends")
+
+    const friendRequestSent = reciever.friendRequests.find(item => item.user.equals(sender._id))
+    if(friendRequestSent) throw new Error("Friend request already sent to this user")
+
+    const friendRequestRecieved = sender.friendRequests.find(item => item.user.equals(reciever._id))
+    if(friendRequestRecieved) throw new Error("Friend request already recieved from this user")
+
+    const datenow = Date.now()
     reciever.friendRequests.push({timestamp: datenow, user: sender})
     const updated = await reciever.save()
     if(updated) {
@@ -76,6 +84,78 @@ exports.cancelFriendRequest = asyncHandler(async (req, res, next) => {
       res.json(updated)
     } else {
       throw new Error("Friend request cancelation failed")
+    }
+  } catch(err) {
+    res.status(400).json({message: err.message})
+  }
+})
+
+exports.acceptFriendRequest = asyncHandler(async (req, res, next) => {
+  try {
+    const sender = await User.findById(req.params.id)
+    const reciever = await User.findById(req.body.user)
+    if(!sender || !reciever) throw new Error("User not found")
+
+    const friendRequest = sender.friendRequests.find(item => item.user.equals(reciever._id))
+    if(!friendRequest) throw new Error("Friend request not found")
+
+    sender.friendRequests.pull({ _id: friendRequest._id})
+    sender.friends.push(reciever)
+    const updatedSender = await sender.save()
+
+    reciever.friends.push(sender)
+    const updatedReciever = await reciever.save()
+    if(updatedSender && updatedReciever) {
+      res.json({sender: updatedSender, reciever: updatedReciever})
+    } else {
+      throw new Error("Friend request acceptation failed")
+    }
+  } catch(err) {
+    res.status(400).json({message: err.message})
+  }
+})
+
+exports.rejectFriendRequest = asyncHandler(async (req, res, next) => {
+  try {
+    const sender = await User.findById(req.params.id)
+    const reciever = await User.findById(req.body.user)
+    if(!sender || !reciever) throw new Error("User not found")
+
+    const friendRequest = sender.friendRequests.find(item => item.user.equals(reciever._id))
+    if(!friendRequest) throw new Error("Friend request not found")
+
+    sender.friendRequests.pull({ _id: friendRequest._id})
+    const updatedSender = await sender.save()
+
+    if(updatedSender) {
+      res.json(updatedSender)
+    } else {
+      throw new Error("Friend request rejection failed")
+    }
+  } catch(err) {
+    res.status(400).json({message: err.message})
+  }
+})
+
+exports.removeFriend = asyncHandler(async (req, res, next) => {
+  try {
+    const sender = await User.findById(req.params.id)
+    const reciever = await User.findById(req.body.user)
+    if(!sender || !reciever) throw new Error("User not found")
+
+    const friend = sender.friends.find(item => item._id.equals(reciever._id))
+    if(!friend) throw new Error("Not friends")
+
+    sender.friends.pull({_id: reciever._id})
+    const updatedSender = await sender.save()
+
+    reciever.friends.pull({_id: sender._id})
+    const updatedReciever = await reciever.save()
+
+    if(updatedSender && updatedReciever) {
+      res.json({sender: updatedSender, reciever: updatedReciever})
+    } else {
+      throw new Error("Friend remove failed")
     }
   } catch(err) {
     res.status(400).json({message: err.message})
