@@ -1,7 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Montserrat:wght@500&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body {
   margin: 0;
+}
+
+@layer base {
+  html {
+    font-family: 'Montserrat', sand-serif;
+  }
 }

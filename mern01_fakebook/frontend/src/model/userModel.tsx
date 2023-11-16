@@ -1,3 +1,5 @@
+import { PostModel } from "@/model/postModel"
+
 export interface UserModel {
   _id?: string,
   name: string,
@@ -8,7 +10,12 @@ export interface UserModel {
   authTime: string,
   about?: string,
   friends: UserModel[],
-  friendRequests: UserModel[],
+  friendRequests: {
+    timestamp: Date,
+    user: UserModel
+  }[],
   createdAt: Date,
-  updatedAt: Date
+  updatedAt: Date,
+  posts: PostModel[],
+  requestedFriends: UserModel[]
 }
