@@ -10,6 +10,7 @@ import { UserModel } from "@/model/userModel"
 import { Link } from "react-router-dom"
 import { PATH_USERS } from "@/components/MainRouter"
 import { AuthContext } from "@/context/AuthContext"
+import Likes from "@/components/dashboard/Likes"
 
 interface PostProps {
   buttons: boolean,
@@ -25,6 +26,7 @@ const Post = (props: PostProps) => {
 
   const [update, setUpdate] = useState(false)
   const [likedByLoggedUser, setLikedByLoggedUser] = useState(false)
+  const [likesPopup, setLikesPopup] = useState(false)
   const [likesCount, setLikesCount] = useState(props.post.likesCount)
   const [commentCount, setCommentCount] = useState(props.post.commentCount || 0)
 
@@ -105,8 +107,8 @@ const Post = (props: PostProps) => {
       </div>
 
       <div className="flex justify-between bg-white text-sm">
-        <p className="mx-4 my-2">{likesCount} {likesCount === 1 ? 'Like' : 'Likes'}</p>
-        <p className="mx-4 my-2">{commentCount} {commentCount === 1 ? 'Comment' : 'Comments'}</p>
+        <p className="mx-4 my-2 cursor-pointer hover:underline" onClick={() => setLikesPopup(true)}>{likesCount} {likesCount === 1 ? 'Like' : 'Likes'}</p>
+        <p className="mx-4 my-2 cursor-pointer hover:underline">{commentCount} {commentCount === 1 ? 'Comment' : 'Comments'}</p>
       </div>
 
       <div className="grid grid-cols-2">
@@ -119,6 +121,8 @@ const Post = (props: PostProps) => {
           <FaRegComment/>
         </p>
       </div>
+
+      <Likes trigger={likesPopup} setTrigger={setLikesPopup} post={props.post} />
 
     </div>
   )
