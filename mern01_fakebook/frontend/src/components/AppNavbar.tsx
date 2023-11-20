@@ -19,7 +19,7 @@ const AppNavbar = () => {
 
         <div className="flex items-center">
           <Link to={`${PATH_USERS}/${authContext?.loggedUser?._id}`}>
-            <img className="w-8 rounded-full hover:bg-black p-1" src={authContext?.loggedUser?.imageURL} alt="profile picture" />
+            <img className="w-8 rounded-full hover:bg-black p-1" src={authContext?.loggedUser?.imageURL} alt="profile picture" referrerPolicy="no-referrer" />
           </Link>
 
           <button onClick={() => { 

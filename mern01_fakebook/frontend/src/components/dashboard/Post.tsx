@@ -26,14 +26,13 @@ const Post = (props: PostProps) => {
   const [update, setUpdate] = useState(false)
   const [likedByLoggedUser, setLikedByLoggedUser] = useState(false)
   const [likesCount, setLikesCount] = useState(props.post.likesCount)
-  const [commentCount, setCommentCount] = useState(props.post.commentCount)
+  const [commentCount, setCommentCount] = useState(props.post.commentCount || 0)
 
   const createdAt = formatDate(props.post.createdAt)
   const updatedAt = formatDate(props.post.updatedAt)
   const updated = createdAt !== updatedAt ? `, updated on ${updatedAt}` : ''
 
   useEffect(() => {
-    props.post.likes.forEach(item => console.log(item))
     props.post.likes.forEach(item => {
       const userId = item._id || item
       userId === authContext?.loggedUser?._id && setLikedByLoggedUser(true)
@@ -74,11 +73,11 @@ const Post = (props: PostProps) => {
       <div className="flex justify-between items-center px-4 py-1">
         <div className="flex items-center">
 
-          <Link to={`${PATH_USERS}/${props.post.user?._id || props.user?._id}`} className="mr-1 mt-1">
-            <img className="w-6 rounded-full cursor-pointer" src={props.post.user?.imageURL || props.user?.imageURL} alt="profile pic" />
+          <Link to={`${PATH_USERS}/${props.post.user?._id}`} className="mr-1 mt-1">
+            <img className="w-6 rounded-full cursor-pointer" src={props.post.user?.imageURL} alt="profile pic" referrerPolicy="no-referrer" />
           </Link>
-          <Link to={`${PATH_USERS}/${props.post.user?._id || props.user?._id}`} className="text-black no-underline">
-            <p className="m-1 cursor-pointer">{props.post.user?.name || props.user?.name}</p>
+          <Link to={`${PATH_USERS}/${props.post.user?._id}`} className="text-black no-underline">
+            <p className="m-1 cursor-pointer">{props.post.user?.name}</p>
           </Link>
           <div className="px-2 py-1 text-xs text-gray-500">
             {`posted on ${createdAt}${updated}`}
@@ -106,8 +105,8 @@ const Post = (props: PostProps) => {
       </div>
 
       <div className="flex justify-between bg-white text-sm">
-        <p className="mx-4 my-1">{likesCount} {likesCount === 1 ? 'Like' : 'Likes'}</p>
-        <p className="mx-4 my-1">{commentCount} {commentCount === 1 ? 'Comment' : 'Comments'}</p>
+        <p className="mx-4 my-2">{likesCount} {likesCount === 1 ? 'Like' : 'Likes'}</p>
+        <p className="mx-4 my-2">{commentCount} {commentCount === 1 ? 'Comment' : 'Comments'}</p>
       </div>
 
       <div className="grid grid-cols-2">

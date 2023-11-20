@@ -10,8 +10,8 @@ příprave fe
 7. friendList + rozklik je odkaz na profil
 8. friend requests + přijímání/odmítání/cancel + u cizích profilů nahoře ukázat zda jsme friends
 
-9. oddělený getter na userPosts - tím budu moct správně řadit a taky se zbavím oseru s populací user.posts.likes.user._id a v Post.tsx nebudu muset mít všude nebo, ale vždy bude jasný post
-
+be
+1. tests
 
 
 inspirace

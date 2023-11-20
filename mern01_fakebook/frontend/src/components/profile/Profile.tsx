@@ -22,9 +22,9 @@ const Profile = () => {
     if(authContext?.authenticated) {
       UserService.userDetail(params.userId!).then(item => {
         setUser(item)
-        setPosts(item!.posts)
         setLoading(false)
       })
+      UserService.getUserPosts(params.userId!).then(item => setPosts(item))
     }
   }, [authContext?.authenticated, params.userId])
 
@@ -34,7 +34,7 @@ const Profile = () => {
       <div>
         <p>{user?.name}</p>
         <p>{user?.email}</p>
-        <img className="w-16 rounded-xl" src={user?.imageURL} alt="profile picture" />
+        <img className="w-16 rounded-xl" src={user?.imageURL} alt="profile picture" referrerPolicy="no-referrer" />
         <p>{user?.about}</p>
         <ProfilePostList posts={posts} setPosts={setPosts} user={user!} />
       </div>}
