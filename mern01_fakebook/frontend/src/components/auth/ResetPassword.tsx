@@ -27,8 +27,8 @@ const ResetPassword = () => {
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col w-full">
 
           <p className="mx-2 my-0">Email</p>
-          <input type="email" className="border border-black rounded-xl m-2 p-2 bg-indigo-100"
-              {...register("email", {required: "This field is required"})}
+          <input type="email" className="border border-black rounded-xl m-2 p-2 bg-indigo-100 font-montserrat"
+            {...register("email", {required: "This field is required"})}
           />
           {errors.email && <p className="mx-2 my-0 text-rose-600 text-sm">{errors.email.message}</p>}
 

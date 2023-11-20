@@ -1,24 +1,3 @@
-// import { useContext } from "react"
-// import { AuthContext } from "@/context/AuthContext"
-
-// // remove user must be done manualy from mongodb as well as firebase->Authentication->Users
-// const Login = () => {
-
-//   const authContext = useContext(AuthContext)
-
-//   return (
-//     <div>
-//       {authContext?.authenticated
-//         ? <button onClick={() => authContext.logout()}>{authContext.loggedUserId}</button>
-//         : <div>
-//             <button onClick={() => authContext?.loginWithGoogle()}>login google</button>
-//             <button onClick={() => authContext?.registerWithEmailAndPassword('ad@asd.cz', 'asdasd')}>register e/p</button>
-//           </div>}
-//     </div>
-//   )
-// }
-
-// export default Login
 import { useEffect, useContext, useState } from "react"
 import { AuthContext } from "@/context/AuthContext"
 import { useNavigate } from "react-router-dom"
@@ -69,14 +48,14 @@ const Login = () => {
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col w-full">
 
           <p className="mx-2 my-0">Email</p>
-          <input type="email" className="border border-black rounded-2xl m-2 p-2 bg-indigo-100"
-              {...register("email", {required: "This field is required"})}
+          <input type="email" className="border border-black rounded-2xl m-2 p-2 bg-indigo-100 font-montserrat"
+            {...register("email", {required: "This field is required"})}
           />
           {errors.email && <p className="mx-2 my-0 text-rose-600 text-sm">{errors.email.message}</p>}
 
           <p className="mx-2 mt-4 mb-0">Password</p>
-          <input type="password" className="border border-black rounded-2xl m-2 p-2 bg-indigo-100"
-                {...register("password", {required: "This field is required"})}
+          <input type="password" className="border border-black rounded-2xl m-2 p-2 bg-indigo-100 font-montserrat"
+            {...register("password", {required: "This field is required"})}
           />
           {errors.password && <p className="mx-2 my-0 text-rose-600 text-sm">{errors.password.message}</p>}
 

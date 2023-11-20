@@ -1,5 +1,6 @@
 const asyncHandler = require("express-async-handler")
 const User = require('../models/user')
+const Post = require('../models/post')
 
 exports.userList = asyncHandler(async (req, res, next) => {
   const users = await User.find().sort({ name: 1 }).populate('friends posts requestedFriends')
@@ -36,6 +37,19 @@ exports.updateUserDetail = asyncHandler(async (req, res, next) => {
     } else {
       throw new Error("User not found")
     }
+  } catch(err) {
+    res.status(400).json({message: err.message})
+  }
+})
+
+exports.getUserPosts = asyncHandler(async (req, res, next) => {
+  try {
+    const user = await User.findById(req.params.id)
+    if(!user) throw new Error("User not found")
+
+    const posts = await Post.find({user: req.params.id}).sort({ createdAt: -1 }).populate("user")
+    res.json(posts)
+
   } catch(err) {
     res.status(400).json({message: err.message})
   }

@@ -8,6 +8,8 @@ router.get("/", userController.userList)
 
 router.put("/:id", userController.updateUserDetail)
 
+router.get("/:id/posts", userController.getUserPosts)
+
 router.put("/sendfriendrequest/:id", userController.sendFriendRequest)
 
 router.put("/cancelfriendrequest/:id", userController.cancelFriendRequest)

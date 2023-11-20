@@ -11,15 +11,15 @@ const AppNavbar = () => {
 
   return (
     <div>
-      <div className={"bg-gradient-to-r from-indigo-200 to-purple-300 h-16 flex items-center justify-between"}>
+      <div className={"fixed w-full top-0 bg-gradient-to-r from-indigo-200 to-purple-300 h-16 flex items-center justify-between"}>
 
         <div className="rotate-6">
           <Link to={PATH_DASHBOARD} className="mx-3 my-4 text-xl no-underline text-black hover:bg-black hover:text-white p-2 rounded-lg">Fakebook</Link>
         </div>
 
         <div className="flex items-center">
-          <Link to={`${PATH_USERS}/${authContext?.loggedUserId}`}>
-            <img className="w-8 rounded-full hover:bg-black p-1" src={authContext?.loggedUserImageURL!} alt="profile picture" />
+          <Link to={`${PATH_USERS}/${authContext?.loggedUser?._id}`}>
+            <img className="w-8 rounded-full hover:bg-black p-1" src={authContext?.loggedUser?.imageURL} alt="profile picture" referrerPolicy="no-referrer" />
           </Link>
 
           <button onClick={() => { 
@@ -28,7 +28,9 @@ const AppNavbar = () => {
         </div>
 
       </div>
-      <Outlet />
+      <div className="mt-20">
+        <Outlet />
+      </div>
     </div>
   )
 }
