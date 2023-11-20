@@ -26,7 +26,7 @@ const Profile = () => {
         setLoading(false)
       })
     }
-  }, [authContext?.authenticated])
+  }, [authContext?.authenticated, params.userId])
 
   return (
     <div>

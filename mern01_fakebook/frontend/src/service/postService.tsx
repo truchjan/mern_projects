@@ -79,4 +79,46 @@ export namespace PostService {
       return
     }
   }
+
+  export async function addLike(userId: string, postId: string): Promise<PostModel | null> {
+    try {
+      const response = await fetch(`${api}/addlike/${postId}`, {
+        method: 'PUT',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${getAccessToken()}`
+        },
+        credentials: 'include',
+        body: JSON.stringify({user: userId})}
+      )
+
+      if(response.status === 403) return null
+
+      return response.json()
+    } catch(error) {
+      return null
+    }
+  }
+
+  export async function removeLike(userId: string, postId: string): Promise<PostModel | null> {
+    try {
+      const response = await fetch(`${api}/removelike/${postId}`, {
+        method: 'PUT',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${getAccessToken()}`
+        },
+        credentials: 'include',
+        body: JSON.stringify({user: userId})}
+      )
+
+      if(response.status === 403) return null
+
+      return response.json()
+    } catch(error) {
+      return null
+    }
+  }
 }
