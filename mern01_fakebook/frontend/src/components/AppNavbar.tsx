@@ -8,7 +8,6 @@ const AppNavbar = () => {
   const navigate = useNavigate()
   const authContext = useContext(AuthContext)
 
-
   return (
     <div>
       <div className={"fixed w-full top-0 bg-gradient-to-r from-indigo-200 to-purple-300 h-16 flex items-center justify-between"}>
@@ -20,6 +19,10 @@ const AppNavbar = () => {
         <div className="flex items-center">
           <Link to={`${PATH_USERS}/${authContext?.loggedUser?._id}`}>
             <img className="w-8 rounded-full hover:bg-black p-1" src={authContext?.loggedUser?.imageURL} alt="profile picture" referrerPolicy="no-referrer" />
+          </Link>
+
+          <Link to={`${PATH_USERS}/${authContext?.loggedUser?._id}/update`} className="no-underline cursor-pointer text-black text-lg rounded-lg hover:bg-black hover:text-white">
+            <p className="m-1">Update</p>
           </Link>
 
           <button onClick={() => { 

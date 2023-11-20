@@ -31,7 +31,7 @@ const Likes = (props: LikesProps) => {
 
   return (props.trigger) ? (
     <div className="fixed top-0 left-0 w-full h-full bg-transparent backdrop-blur-sm flex justify-center items-center">
-      <div className="relative p-4 h-1/2 max-h-xl w-3/4 max-w-xl bg-white rounded-lg overflow-auto" ref={ref}>
+      <div className="relative p-4 h-1/2 max-h-xl w-3/4 max-w-xl bg-white rounded-lg overflow-auto border-solid border-indigo-300" ref={ref}>
 
         <button className="absolute top-4 right-4 flex justify-center items-center text-2xl p-0 border-0 bg-white cursor-pointer hover:bg-rose-400 rounded-md"
             onClick={() => props.setTrigger(false)}>
