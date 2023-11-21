@@ -23,7 +23,26 @@ export namespace UserService {
     }
   }
 
-  // TODO - update user details
+  export async function updateUser(user: UserModel, userId: string): Promise<UserModel | null> {
+    try {
+      const response = await fetch(`${api}/${userId}`, {
+        method: 'PUT',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${getAccessToken()}`
+        },
+        credentials: 'include',
+        body: JSON.stringify(user)}
+      )
+
+      if(response.status === 403) return null
+
+      return response.json()
+    } catch(error) {
+      return null
+    }
+  }
 
   export async function getUserPosts(id: string): Promise<PostModel[]> {
     try {
