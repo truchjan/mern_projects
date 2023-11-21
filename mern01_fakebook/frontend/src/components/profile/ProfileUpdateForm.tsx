@@ -84,7 +84,7 @@ const ProfileUpdateForm = () => {
         {errors.about && <p className="text-rose-500 text-sm mt-1">{errors.about.message}</p>}
 
         
-        <button type="submit" className={"mt-8 mb-4 w-16 h-8 border-none rounded-xl bg-indigo-300 cursor-pointer font-montserrat font-bold hover:bg-black hover:text-white"}>
+        <button type="submit" className={"mt-8 mb-4 w-20 h-8 border-none rounded-xl bg-indigo-300 cursor-pointer font-montserrat font-bold hover:bg-black hover:text-white"}>
           Update
         </button>
         {error && <p className="mx-2 my-0 text-rose-600 text-sm">{error}</p>}

@@ -6,18 +6,17 @@ import { FaRegComment } from "react-icons/fa"
 import { PostModel } from "@/model/postModel"
 import { PostService } from "@/service/postService"
 import PostForm from "@/components/dashboard/PostForm"
-import { UserModel } from "@/model/userModel"
 import { Link } from "react-router-dom"
 import { PATH_USERS } from "@/components/MainRouter"
 import { AuthContext } from "@/context/AuthContext"
 import Likes from "@/components/dashboard/Likes"
+import CommentList from "@/components/comment/CommentList"
 
 interface PostProps {
   buttons: boolean,
   post: PostModel,
   posts?: PostModel[],
-  setPosts?: React.Dispatch<React.SetStateAction<PostModel[]>>,
-  user?: UserModel
+  setPosts?: React.Dispatch<React.SetStateAction<PostModel[]>>
 }
 
 const Post = (props: PostProps) => {
@@ -28,7 +27,8 @@ const Post = (props: PostProps) => {
   const [likedByLoggedUser, setLikedByLoggedUser] = useState(false)
   const [likesPopup, setLikesPopup] = useState(false)
   const [likesCount, setLikesCount] = useState(props.post.likesCount)
-  const [commentCount, setCommentCount] = useState(props.post.commentCount || 0)
+  const [commentCount, setCommentCount] = useState(props.post.commentCount)
+  const [showComments, setShowComments] = useState(false)
 
   const createdAt = formatDate(props.post.createdAt)
   const updatedAt = formatDate(props.post.updatedAt)
@@ -55,6 +55,10 @@ const Post = (props: PostProps) => {
     })
   }
 
+  function triggerComments() {
+    setShowComments(prev => !prev)
+  }
+
   function addLike() {
     PostService.addLike(authContext?.loggedUser?._id!, props.post._id!).then(() => {
       setLikedByLoggedUser(true)
@@ -70,7 +74,7 @@ const Post = (props: PostProps) => {
   }
 
   return (
-    <div className="flex flex-col bg-gray-100 rounded-lg mt-6 w-full max-w-xl shadow-[0_0_10px_0_rgb(0,0,0,0.3)]">
+    <div className="flex flex-col bg-gray-100 rounded-lg mt-6 w-full max-w-2xl shadow-[0_0_10px_0_rgb(0,0,0,0.3)]">
       
       <div className="flex justify-between items-center px-4 py-1">
         <div className="flex items-center">
@@ -108,8 +112,10 @@ const Post = (props: PostProps) => {
 
       <div className="flex justify-between bg-white text-sm">
         <p className="mx-4 my-2 cursor-pointer hover:underline" onClick={() => setLikesPopup(true)}>{likesCount} {likesCount === 1 ? 'Like' : 'Likes'}</p>
-        <p className="mx-4 my-2 cursor-pointer hover:underline">{commentCount} {commentCount === 1 ? 'Comment' : 'Comments'}</p>
+        <p className="mx-4 my-2 cursor-pointer hover:underline" onClick={() => triggerComments()}>{commentCount} {commentCount === 1 ? 'Comment' : 'Comments'}</p>
       </div>
+
+      {showComments && <CommentList post={props.post} setCommentCount={setCommentCount} />}
 
       <div className="grid grid-cols-2">
         <p className="w-full text-center m-1 text-xl cursor-pointer hover:text-indigo-300"
@@ -117,7 +123,7 @@ const Post = (props: PostProps) => {
           {likedByLoggedUser ? <AiFillLike/> : <AiOutlineLike/>}
         </p>
         <p className="w-full text-center m-1 text-xl cursor-pointer hover:text-indigo-300"
-            onClick={() => console.log('add comment')}>
+            onClick={() => triggerComments()}>
           <FaRegComment/>
         </p>
       </div>

@@ -72,6 +72,19 @@ exports.deletePost = asyncHandler(async (req, res, next) => {
   }
 })
 
+exports.getPostComments = asyncHandler(async (req, res, next) => {
+  try {
+    const post = await Post.findById(req.params.id)
+    if(!post) throw new Error("Post not found")
+
+    const comments = await Comment.find({post: req.params.id}).sort({ createdAt: 1 }).populate("user post")
+    res.json(comments)
+
+  } catch(err) {
+    res.status(400).json({message: err.message})
+  }
+})
+
 exports.addLike = asyncHandler(async (req, res, next) => {
   try {
     const post = await Post.findById(req.params.id)

@@ -1,3 +1,4 @@
+import { CommentModel } from "@/model/commentModel"
 import { PostModel } from "@/model/postModel"
 import { getAccessToken } from "@/utils/accessTokenStorage"
 
@@ -77,6 +78,23 @@ export namespace PostService {
 
     } catch(error) {
       return
+    }
+  }
+
+  export async function getPostComments(postId: string): Promise<CommentModel[]> {
+    try {
+      const response = await fetch(`${api}/${postId}/comments`, {
+        headers: {
+          'Authorization': `Bearer ${getAccessToken()}`
+        },
+        credentials: 'include'
+      })
+
+      if(response.status === 403) return []
+
+      return response.json()
+    } catch(error) {
+      return []
     }
   }
 

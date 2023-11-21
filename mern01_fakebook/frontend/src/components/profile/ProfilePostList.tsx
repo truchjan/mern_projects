@@ -29,7 +29,7 @@ const ProfilePostList = (props: ProfilePostListProps) => {
 
   return (
     <div className="flex flex-col items-center w-full">
-      {!loading && props.posts.map((post: PostModel) => <Post key={post._id} buttons={buttons} post={post} posts={props.posts} setPosts={props.setPosts} user={props.user} />)}
+      {!loading && props.posts.map((post: PostModel) => <Post key={post._id} buttons={buttons} post={post} posts={props.posts} setPosts={props.setPosts} />)}
     </div>
   )
 }
