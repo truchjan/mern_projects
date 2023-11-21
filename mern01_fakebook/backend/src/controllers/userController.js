@@ -47,7 +47,7 @@ exports.getUserPosts = asyncHandler(async (req, res, next) => {
     const user = await User.findById(req.params.id)
     if(!user) throw new Error("User not found")
 
-    const posts = await Post.find({user: req.params.id}).sort({ createdAt: -1 }).populate("user")
+    const posts = await Post.find({user: req.params.id}).sort({ createdAt: -1 }).populate("user likes")
     res.json(posts)
 
   } catch(err) {
