@@ -53,7 +53,7 @@ const ProfileUpdateForm = () => {
         <div className="flex justify-center">
           <div>
             <p className="my-4">Profile picture</p>
-            <img src={user?.imageURL} className="w-32 border-solid border-indigo-300 border-2 rounded-md" alt="profile picture" />
+            <img src={user?.imageURL} className="w-32 h-32 object-cover border-solid border-indigo-300 border-2 rounded-md" alt="profile picture" />
           </div>
 
           <div className="m-8">
@@ -84,7 +84,7 @@ const ProfileUpdateForm = () => {
         {errors.about && <p className="text-rose-500 text-sm mt-1">{errors.about.message}</p>}
 
         
-        <button type="submit" className={"mt-8 mb-4 w-16 h-8 border-none rounded-xl bg-indigo-300 cursor-pointer font-montserrat font-bold hover:bg-black hover:text-white"}>
+        <button type="submit" className={"mt-8 mb-4 w-20 h-8 border-none rounded-xl bg-indigo-300 cursor-pointer font-montserrat font-bold hover:bg-black hover:text-white"}>
           Update
         </button>
         {error && <p className="mx-2 my-0 text-rose-600 text-sm">{error}</p>}

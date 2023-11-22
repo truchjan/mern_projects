@@ -13,6 +13,8 @@ router.put("/:id", postController.updatePost)
 
 router.delete("/:id", postController.deletePost)
 
+router.get("/:id/comments", postController.getPostComments)
+
 router.put("/addlike/:id", postController.addLike)
 
 router.put("/removelike/:id", postController.removeLike)
