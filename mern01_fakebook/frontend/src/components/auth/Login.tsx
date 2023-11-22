@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom"
 import { PATH_DASHBOARD, PATH_RESET_PASSWORD } from "@/components/MainRouter"
 import { useForm } from "react-hook-form"
 import { BsGoogle } from "react-icons/bs"
+import { getRandomUser } from "@/utils/getRandomUser"
 
 // remove user must be done manualy from mongodb as well as firebase->Authentication->Users
 const Login = () => {
@@ -37,6 +38,11 @@ const Login = () => {
         setError('Invalid login credentials')
       })
     }
+  }
+
+  function loginAsExampleUser() {
+    const user = getRandomUser()
+    authContext?.loginWithEmailAndPassword(user.email, user.password)
   }
 
   return (
@@ -80,6 +86,11 @@ const Login = () => {
                 <BsGoogle />
                 <p className="m-0 ml-2">Login with Google</p>
               </div>
+          </button>
+
+          <button className="mt-2 mx-2 h-8 border rounded-2xl bg-transparent cursor-pointer hover:bg-black hover:text-white font-montserrat font-bold"
+            onClick={() => loginAsExampleUser()}>
+              Log in as Example User
           </button>
           
         </div>

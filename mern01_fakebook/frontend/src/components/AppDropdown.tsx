@@ -33,7 +33,7 @@ const AppDropdown = () => {
             </div>
 
             <Link to={`${PATH_USERS}/${authContext?.loggedUser?._id}/update`} className="no-underline m-0" onClick={() => setOpen(false)}>
-              <p className="my-0 mx-1 p-2 cursor-pointer text-black rounded-lg hover:bg-black hover:text-white">Update</p>
+              <p className="my-0 mx-1 p-2 cursor-pointer text-black rounded-lg hover:bg-black hover:text-white">Update Profile</p>
             </Link>
 
             <div className="flex justify-center bg-white">
