@@ -5,7 +5,7 @@ import { useNavigate, useParams } from "react-router-dom"
 import { PATH_ROOT } from "@/components/MainRouter"
 import { UserService } from "@/service/userService"
 import { PostModel } from "@/model/postModel"
-import ProfilePostList from "@/components/profile/ProfilePostList"
+import PostList from "@/components/dashboard/PostList"
 
 const Profile = () => {
 
@@ -14,7 +14,7 @@ const Profile = () => {
   const authContext = useContext(AuthContext)
 
   const [user, setUser] = useState<UserModel | null>()
-  const [posts, setPosts] = useState<PostModel[]>([])
+  const [posts, setPosts] = useState<PostModel[] | undefined>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -34,9 +34,9 @@ const Profile = () => {
       <div>
         <p>{user?.name}</p>
         <p>{user?.email}</p>
-        <img className="w-16 rounded-xl" src={user?.imageURL} alt="profile picture" referrerPolicy="no-referrer" />
+        <img className="w-16 h-16 object-cover rounded-xl" src={user?.imageURL} alt="profile picture" referrerPolicy="no-referrer" />
         <p>{user?.about}</p>
-        <ProfilePostList posts={posts} setPosts={setPosts} user={user!} />
+        <PostList posts={posts} setPosts={setPosts} />
       </div>}
     </div>
   )

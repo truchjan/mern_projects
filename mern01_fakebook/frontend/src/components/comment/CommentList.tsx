@@ -26,7 +26,9 @@ const CommentList = (props: PostProps) => {
   return (
     <div>
       <CommentForm create={true} post={props.post} comments={comments} setComments={setComments} setCommentCount={props.setCommentCount} />
-      {!loading && comments && comments.map((comment: CommentModel) => <Comment key={comment._id} buttons={false} comment={comment} />)}
+      {!loading && comments && comments.map((comment: CommentModel) => {
+        return <Comment key={comment._id} post={props.post} comment={comment} comments={comments} setComments={setComments} setCommentCount={props.setCommentCount} />
+      })}
     </div>
   )
 }

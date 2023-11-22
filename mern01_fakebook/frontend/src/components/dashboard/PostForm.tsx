@@ -6,8 +6,8 @@ import { PostService } from "@/service/postService"
 
 interface PostListProps {
   create: boolean,
-  posts: PostModel[],
-  setPosts: React.Dispatch<React.SetStateAction<PostModel[]>>,
+  posts: PostModel[] | undefined,
+  setPosts: React.Dispatch<React.SetStateAction<PostModel[] | undefined>>,
   postToUpdate?: PostModel,
   finishUpdate?: () => void
 }
@@ -25,12 +25,12 @@ const PostForm = (props: PostListProps) => {
   const onSubmit = (data: any) => {
     if(props.create) {
       PostService.createPost(authContext?.loggedUser?._id!, data).then(item => {
-        props.setPosts([item!, ...props.posts])
+        props.setPosts([item!, ...props.posts!])
         reset()
       })
     } else {
       PostService.updatePost(data, props.postToUpdate?._id!).then(updatedPost => {
-        props.setPosts(prev => prev.map(item => item._id === props.postToUpdate?._id ? {...updatedPost!, user: props.postToUpdate?.user} : item))
+        props.setPosts(prev => prev!.map(item => item._id === props.postToUpdate?._id ? {...updatedPost!, user: props.postToUpdate?.user} : item))
         if(props.finishUpdate) props.finishUpdate()
       })
     }

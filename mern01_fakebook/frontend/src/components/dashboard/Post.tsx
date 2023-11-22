@@ -13,10 +13,9 @@ import Likes from "@/components/dashboard/Likes"
 import CommentList from "@/components/comment/CommentList"
 
 interface PostProps {
-  buttons: boolean,
   post: PostModel,
-  posts?: PostModel[],
-  setPosts?: React.Dispatch<React.SetStateAction<PostModel[]>>
+  posts?: PostModel[] | undefined,
+  setPosts?: React.Dispatch<React.SetStateAction<PostModel[] | undefined>>
 }
 
 const Post = (props: PostProps) => {
@@ -33,6 +32,8 @@ const Post = (props: PostProps) => {
   const createdAt = formatDate(props.post.createdAt)
   const updatedAt = formatDate(props.post.updatedAt)
   const updated = createdAt !== updatedAt ? `, updated on ${updatedAt}` : ''
+
+  const buttons = authContext?.loggedUser?._id === props.post.user?._id ? true : false
 
   useEffect(() => {
     props.post.likes.forEach(item => {
@@ -80,7 +81,7 @@ const Post = (props: PostProps) => {
         <div className="flex items-center">
 
           <Link to={`${PATH_USERS}/${props.post.user?._id}`} className="mr-1 mt-1">
-            <img className="w-6 rounded-full cursor-pointer" src={props.post.user?.imageURL} alt="profile pic" referrerPolicy="no-referrer" />
+            <img className="w-6 h-6 object-cover rounded-full cursor-pointer" src={props.post.user?.imageURL} alt="profile pic" referrerPolicy="no-referrer" />
           </Link>
           <Link to={`${PATH_USERS}/${props.post.user?._id}`} className="text-black no-underline">
             <p className="m-1 cursor-pointer">{props.post.user?.name}</p>
@@ -91,7 +92,7 @@ const Post = (props: PostProps) => {
 
         </div>
 
-        {props.buttons && <div>
+        {buttons && <div>
           <BiSolidPencil className="text-sky-600 cursor-pointer hover:bg-black rounded-md p-0.5"
             onClick={handleUpdateClick} />
           <AiFillDelete className="text-rose-600 cursor-pointer hover:bg-black rounded-md p-0.5"
@@ -102,7 +103,7 @@ const Post = (props: PostProps) => {
 
       <div className="px-4 py-2 bg-white">
         {update ? <PostForm create={false}
-            posts={props.posts!} setPosts={props.setPosts!}
+            posts={props.posts} setPosts={props.setPosts!}
             postToUpdate={props.post} finishUpdate={finishUpdate} /> : props.post.text}
       </div>
 

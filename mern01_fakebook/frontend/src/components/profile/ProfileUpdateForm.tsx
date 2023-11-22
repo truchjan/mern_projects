@@ -53,7 +53,7 @@ const ProfileUpdateForm = () => {
         <div className="flex justify-center">
           <div>
             <p className="my-4">Profile picture</p>
-            <img src={user?.imageURL} className="w-32 border-solid border-indigo-300 border-2 rounded-md" alt="profile picture" />
+            <img src={user?.imageURL} className="w-32 h-32 object-cover border-solid border-indigo-300 border-2 rounded-md" alt="profile picture" />
           </div>
 
           <div className="m-8">

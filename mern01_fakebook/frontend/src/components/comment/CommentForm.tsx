@@ -15,10 +15,6 @@ interface CommentFormProps {
   finishUpdate?: () => void
 }
 
-// TODO
-// update a delete tlačítko
-// vyřešit to tak, že se kouknu zda comment vytvořil loggedUser a pokud ano, tak tam má tlačítka
-// stejně tak to udělat pro posts - pak by možná šel sjednotit PostList a ProfilePostList
 const CommentForm = (props: CommentFormProps) => {
 
   const authContext = useContext(AuthContext)
