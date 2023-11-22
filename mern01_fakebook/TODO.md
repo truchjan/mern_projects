@@ -9,6 +9,7 @@ příprave fe
 12. do dropdown přidat change password a change email(ad@.. -> asd@..) - pokud to firebase umožnuje
 13. nějaký malý profile info mít i na dashboardu vlevo - je to moc prázdný a po přihlášení example usera ani nevim kdo jsem
 14. my profile zahezkat info o uživateli + vlevo kámoši + nadpis `Posts of ${user}`
+15. pořešit extrémní zúžení obrazovky - u profilu
 
 be
 1. tests

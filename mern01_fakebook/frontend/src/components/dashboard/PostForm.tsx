@@ -37,7 +37,7 @@ const PostForm = (props: PostListProps) => {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={"flex flex-col w-full max-w-2xl items-center shadow-[0_0_10px_0px_rgb(0,0,0,0.3)] rounded-xl bg-white"}>
+    <form onSubmit={handleSubmit(onSubmit)} className={"flex flex-col w-full max-w-3xl items-center mb-6 shadow-[0_0_10px_0px_rgb(0,0,0,0.3)] rounded-xl bg-white"}>
 
       <textarea className={"border-none resize-none mt-2 p-2 h-16 w-11/12 focus:outline-none font-montserrat"}
         placeholder="What's on your mind?"
