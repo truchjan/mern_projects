@@ -7,6 +7,7 @@ import { UserService } from "@/service/userService"
 import { PostModel } from "@/model/postModel"
 import PostList from "@/components/dashboard/PostList"
 import FriendList from "@/components/profile/FriendList"
+import { FaUserPlus } from "react-icons/fa"
 
 const Profile = () => {
 
@@ -34,7 +35,7 @@ const Profile = () => {
     <div className="flex justify-center">
       {!loading && 
       <div className="grid sm:grid-cols-4">
-        <div className="sm:col-span-4 flex ml-8 my-4">
+        <div className="sm:col-span-3 flex ml-8 my-4">
           <img className="w-32 h-32 object-cover rounded-full" src={user?.imageURL} alt="profile picture" referrerPolicy="no-referrer" />
           <div className="ml-4">
             <h2 className="mt-4 mb-1">{user?.name}</h2>
@@ -42,6 +43,15 @@ const Profile = () => {
             <h4 className="my-0">About Me</h4>
             <p className="mt-1 max-w-2xl">{user?.about}</p>
           </div>
+        </div>
+
+        {/* TODO - obrazovat jen pokud se jedná o uživatele, kterého nemám v přátelích, kterému jsem neposlal friend request a který nejsem já */}
+        {/* TODO - onClick - poslat friend request, a nastavit na request sent (nerealoadovat vše) - při novém loadingu se pak už najde v be, že je request poslán */}
+        <div className="flex justify-end items-center">
+          <button className="w-10 h-10 mr-4 p-2 lg:mr-10 text-xl border-none rounded-full cursor-pointer bg-indigo-300 hover:bg-black hover:text-white"
+              onClick={() => console.log('send friend request')}>
+            <FaUserPlus />
+          </button>
         </div>
         
         <div className="mx-2 mb-4">
