@@ -20,7 +20,7 @@ const Likes = (props: LikesProps) => {
     return (
       <div key={item._id} className="flex items-center">
         <Link to={`${PATH_USERS}/${item._id}`} className="mr-1 mt-1">
-          <img className="w-6 h-6 object-cover rounded-full cursor-pointer" src={item.imageURL} alt="profile pic" referrerPolicy="no-referrer" />
+          <img className="w-8 h-8 object-cover rounded-full cursor-pointer" src={item.imageURL} alt="profile pic" referrerPolicy="no-referrer" />
         </Link>
         <Link to={`${PATH_USERS}/${item._id}`} className="text-black no-underline hover:underline">
           <p className="m-1 cursor-pointer">{item.name}</p>

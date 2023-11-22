@@ -50,7 +50,7 @@ const Comment = (props: CommentProps) => {
 
       <div className="flex items-center">
         <Link to={`${PATH_USERS}/${props.comment.user?._id}`} className="mr-1 mt-1">
-          <img className="w-6 h-6 object-cover rounded-full cursor-pointer" src={props.comment.user?.imageURL} alt="profile pic" referrerPolicy="no-referrer" />
+          <img className="w-8 h-8 object-cover rounded-full cursor-pointer" src={props.comment.user?.imageURL} alt="profile pic" referrerPolicy="no-referrer" />
         </Link>
         <Link to={`${PATH_USERS}/${props.comment.user?._id}`} className="text-black no-underline">
           <p className="m-1 cursor-pointer">{props.comment.user?.name}</p>

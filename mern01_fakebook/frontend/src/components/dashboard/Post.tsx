@@ -81,7 +81,7 @@ const Post = (props: PostProps) => {
         <div className="flex items-center">
 
           <Link to={`${PATH_USERS}/${props.post.user?._id}`} className="mr-1 mt-1">
-            <img className="w-6 h-6 object-cover rounded-full cursor-pointer" src={props.post.user?.imageURL} alt="profile pic" referrerPolicy="no-referrer" />
+            <img className="w-8 h-8 object-cover rounded-full cursor-pointer" src={props.post.user?.imageURL} alt="profile pic" referrerPolicy="no-referrer" />
           </Link>
           <Link to={`${PATH_USERS}/${props.post.user?._id}`} className="text-black no-underline">
             <p className="m-1 cursor-pointer">{props.post.user?.name}</p>

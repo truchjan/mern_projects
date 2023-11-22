@@ -34,7 +34,7 @@ const Profile = () => {
       <div>
         <p>{user?.name}</p>
         <p>{user?.email}</p>
-        <img className="w-64 h-64 object-cover rounded-xl" src={user?.imageURL} alt="profile picture" referrerPolicy="no-referrer" />
+        <img className="w-48 h-48 object-cover rounded-xl" src={user?.imageURL} alt="profile picture" referrerPolicy="no-referrer" />
         <p>{user?.about}</p>
         <PostList posts={posts} setPosts={setPosts} />
       </div>}
