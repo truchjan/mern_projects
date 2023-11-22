@@ -1,13 +1,13 @@
 delete this file !!!!
 
 příprave fe
-2. login as example user - random vybere mezi například 5 usery
-3. implementovat dropdown menu - my profile, update profile, logout, change password a možná i change email. inspirace zde https://www.youtube.com/watch?v=KROfo7vuIGY
-4. ten dropdown mít nějak obecně - abych mohl udělat druhý pro friend requesty
+2. login as example user - random vybere mezi například 5 usery (Marek Cukrohorský - pic ještěrka, Vilém Brána - pic brána, Eliáš Pižmo - pic pižmoň, Josef Novák, Karel Novák)
 7. friendList + rozklik je odkaz na profil
 8. friend requests + přijímání/odmítání/cancel + u cizích profilů nahoře ukázat zda jsme friends
 9. toaster
 10. přechody - loading kolečko nebo tak něco
+11. transtion při otevření dropdowns a komentářů
+12. do dropdown přidat change password a change email - pokud to firebase umožnuje
 
 be
 1. tests
