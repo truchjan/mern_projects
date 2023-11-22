@@ -1,11 +1,11 @@
-import { Link, Outlet, useNavigate } from "react-router-dom"
+import { Link, Outlet } from "react-router-dom"
 import { useContext } from "react"
 import { AuthContext } from "@/context/AuthContext"
 import { PATH_DASHBOARD, PATH_USERS } from "@/components/MainRouter"
+import AppDropdown from "./AppDropdown"
 
 const AppNavbar = () => {
 
-  const navigate = useNavigate()
   const authContext = useContext(AuthContext)
 
   return (
@@ -21,13 +21,7 @@ const AppNavbar = () => {
             <img className="w-8 h-8 object-cover rounded-full hover:bg-black p-1" src={authContext?.loggedUser?.imageURL} alt="profile picture" referrerPolicy="no-referrer" />
           </Link>
 
-          <Link to={`${PATH_USERS}/${authContext?.loggedUser?._id}/update`} className="no-underline cursor-pointer text-black text-lg rounded-lg hover:bg-black hover:text-white">
-            <p className="m-1">Update</p>
-          </Link>
-
-          <button onClick={() => { 
-            authContext?.logout().then(() => navigate('/'))            
-            }} className="mx-2 font-montserrat text-lg rounded-lg border-none bg-transparent cursor-pointer hover:bg-black hover:text-white">Logout</button>
+          <AppDropdown />
         </div>
 
       </div>

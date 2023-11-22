@@ -26,7 +26,7 @@ const Post = (props: PostProps) => {
   const [likedByLoggedUser, setLikedByLoggedUser] = useState(false)
   const [likesPopup, setLikesPopup] = useState(false)
   const [likesCount, setLikesCount] = useState(props.post.likesCount)
-  const [commentCount, setCommentCount] = useState(props.post.commentCount)
+  const [commentCount, setCommentCount] = useState(props.post.commentCount || 0)
   const [showComments, setShowComments] = useState(false)
 
   const createdAt = formatDate(props.post.createdAt)
