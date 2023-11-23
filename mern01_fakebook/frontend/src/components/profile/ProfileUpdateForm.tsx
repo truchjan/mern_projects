@@ -63,7 +63,7 @@ const ProfileUpdateForm = () => {
               {...register("imageURL", {required: "This field is required"})}
               disabled={false}
             />
-            {errors.imageURL && <p className="text-rose-500 text-sm mt-1">{errors.imageURL.message}</p>}
+            {errors.imageURL && <p className="text-rose-600 text-sm mt-1">{errors.imageURL.message}</p>}
           </div>
         </div>
 
@@ -74,14 +74,14 @@ const ProfileUpdateForm = () => {
           placeholder="Name"
           {...register("name", {required: "This field is required"})}
         />
-        {errors.name && <p className="text-rose-500 text-sm mt-1">{errors.name.message}</p>}
+        {errors.name && <p className="text-rose-600 text-sm mt-1">{errors.name.message}</p>}
 
         <p className="mt-6 my-1">About Me</p>
         <textarea className={"p-2 w-11/12 focus:outline-none resize-none h-16 font-montserrat rounded-xl border-solid border-indigo-300 border-2"}
           placeholder="About Me"
           {...register("about")}
         />
-        {errors.about && <p className="text-rose-500 text-sm mt-1">{errors.about.message}</p>}
+        {errors.about && <p className="text-rose-600 text-sm mt-1">{errors.about.message}</p>}
 
         
         <button type="submit" className={"mt-8 mb-4 w-20 h-8 border-none rounded-xl bg-indigo-300 cursor-pointer font-montserrat font-bold hover:bg-black hover:text-white"}>
