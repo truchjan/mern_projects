@@ -4,6 +4,8 @@ import { AuthContext } from "@/context/AuthContext"
 import { PATH_DASHBOARD, PATH_USERS } from "@/components/MainRouter"
 import AppDropdown from "./AppDropdown"
 import FriendRequestsDropdown from "@/components/FriendRequestsDropdown"
+import { ToastContainer } from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css'
 
 const AppNavbar = () => {
 
@@ -31,6 +33,7 @@ const AppNavbar = () => {
       <div className="mt-20">
         <Outlet />
       </div>
+      <ToastContainer autoClose={2000} />
     </div>
   )
 }

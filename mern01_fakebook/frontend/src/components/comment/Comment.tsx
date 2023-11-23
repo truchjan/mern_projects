@@ -9,6 +9,7 @@ import { AuthContext } from "@/context/AuthContext"
 import { useContext, useState } from "react"
 import CommentForm from "@/components/comment/CommentForm"
 import { PostModel } from "@/model/postModel"
+import { toast } from "react-toastify"
 
 interface CommentProps {
   post: PostModel,
@@ -43,6 +44,7 @@ const Comment = (props: CommentProps) => {
       props.setComments!(props.comments!.filter(item => item._id !== commentId))
       props.setCommentCount(prev => prev - 1)
     })
+    toast.info('Comment deleted')
   }
 
   return (
