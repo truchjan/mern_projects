@@ -53,7 +53,7 @@ const Comment = (props: CommentProps) => {
           <img className="w-8 h-8 object-cover rounded-full cursor-pointer" src={props.comment.user?.imageURL} alt="profile pic" referrerPolicy="no-referrer" />
         </Link>
         <Link to={`${PATH_USERS}/${props.comment.user?._id}`} className="text-black no-underline">
-          <p className="m-1 cursor-pointer">{props.comment.user?.name}</p>
+          <p className="m-1 cursor-pointer hover:underline">{props.comment.user?.name}</p>
         </Link>
         <div className="px-2 py-1 text-xs text-gray-500">
           {`commented on ${createdAt}${updated}`}

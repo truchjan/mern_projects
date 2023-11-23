@@ -12,7 +12,7 @@ export interface UserModel {
   friends: UserModel[],
   friendRequests: {
     timestamp: Date,
-    user: UserModel
+    user: string
   }[],
   createdAt: Date,
   updatedAt: Date,

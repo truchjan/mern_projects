@@ -84,7 +84,7 @@ const Post = (props: PostProps) => {
             <img className="w-8 h-8 object-cover rounded-full cursor-pointer" src={props.post.user?.imageURL} alt="profile pic" referrerPolicy="no-referrer" />
           </Link>
           <Link to={`${PATH_USERS}/${props.post.user?._id}`} className="text-black no-underline">
-            <p className="m-1 cursor-pointer">{props.post.user?.name}</p>
+            <p className="m-1 cursor-pointer hover:underline">{props.post.user?.name}</p>
           </Link>
           <div className="px-2 py-1 text-xs text-gray-500">
             {`posted on ${createdAt}${updated}`}

@@ -15,7 +15,7 @@ const FriendList = (props: FriendListProps) => {
           <img className="w-8 h-8 object-cover rounded-full cursor-pointer" src={item.imageURL} alt="profile pic" referrerPolicy="no-referrer" />
         </Link>
         <Link to={`${PATH_USERS}/${item._id}`} className="text-black no-underline">
-          <p className="mx-2 my-3 cursor-pointer">{item.name}</p>
+          <p className="mx-2 my-3 cursor-pointer hover:underline">{item.name}</p>
         </Link>
       </div>
     )
