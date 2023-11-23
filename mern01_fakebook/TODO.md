@@ -1,7 +1,6 @@
 delete this file !!!!
 
 příprave fe
-9. toaster
 10. přechody - loading kolečko nebo tak něco
 11. transtion při otevření dropdowns a komentářů
 12. do dropdown přidat change password a change email(ad@.. -> asd@..) - pokud to firebase umožnuje

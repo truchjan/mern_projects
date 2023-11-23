@@ -11,6 +11,7 @@ import { PATH_USERS } from "@/components/MainRouter"
 import { AuthContext } from "@/context/AuthContext"
 import Likes from "@/components/dashboard/Likes"
 import CommentList from "@/components/comment/CommentList"
+import { toast } from "react-toastify"
 
 interface PostProps {
   post: PostModel,
@@ -54,6 +55,7 @@ const Post = (props: PostProps) => {
     PostService.deletePost(postId).then(() => {
       props.setPosts!(props.posts!.filter(item => item._id !== postId))
     })
+    toast.info("Post deleted")
   }
 
   function triggerComments() {
@@ -65,6 +67,7 @@ const Post = (props: PostProps) => {
       setLikedByLoggedUser(true)
       setLikesCount(prev => prev + 1)
     })
+    toast.info("Post liked")
   }
 
   function removeLike() {
@@ -72,6 +75,7 @@ const Post = (props: PostProps) => {
       setLikedByLoggedUser(false)
       setLikesCount(prev => prev - 1)
     })
+    toast.info("Post disliked")
   }
 
   return (

@@ -10,6 +10,7 @@ import FriendList from "@/components/profile/FriendList"
 import { FaUserPlus } from "react-icons/fa"
 import { FaCheck } from "react-icons/fa"
 import { FriendRequestStatusEnum } from "@/components/profile/enum/FriendRequestStatusEnum"
+import { toast } from "react-toastify"
 
 const Profile = () => {
 
@@ -42,10 +43,12 @@ const Profile = () => {
 
   function sendFriendRequest() {
     UserService.sendFriendRequest(authContext?.loggedUser?._id!, user?._id!).then(() => setFriendRequestStatus(FriendRequestStatusEnum.Sent))
+    toast.info('Friend request sent')
   }
 
   function cancelFriendRequest() {
     UserService.cancelFriendRequest(authContext?.loggedUser?._id!, user?._id!).then(() => setFriendRequestStatus(FriendRequestStatusEnum.None))
+    toast.info('Friend request canceled')
   }
 
   function acceptFriendRequest() {
@@ -53,10 +56,12 @@ const Profile = () => {
       setUser(prev => ({...prev!, friends: [...prev?.friends!, authContext?.loggedUser!]}))
       setFriendRequestStatus(FriendRequestStatusEnum.Friends)
     })
+    toast.info('Friend request accepted')
   }
 
   function rejectFriendRequest() {
     UserService.rejectFriendRequest(authContext?.loggedUser?._id!, user?._id!).then(() => setFriendRequestStatus(FriendRequestStatusEnum.None))
+    toast.info('Friend request rejected')
   }
 
   function removeFriend() {
@@ -65,6 +70,7 @@ const Profile = () => {
       setUser(prev => ({...prev!, friends: newFriends!}))
       setFriendRequestStatus(FriendRequestStatusEnum.None)
     })
+    toast.info('Friend removed')
   }
 
   const friendRequestElement = () => {

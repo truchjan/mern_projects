@@ -3,6 +3,7 @@ import { useContext } from "react"
 import { AuthContext } from "@/context/AuthContext"
 import { PostModel } from "@/model/postModel"
 import { PostService } from "@/service/postService"
+import { toast } from "react-toastify"
 
 interface PostListProps {
   create: boolean,
@@ -28,11 +29,13 @@ const PostForm = (props: PostListProps) => {
         props.setPosts([item!, ...props.posts!])
         reset()
       })
+      toast.info("Post created")
     } else {
       PostService.updatePost(data, props.postToUpdate?._id!).then(updatedPost => {
         props.setPosts(prev => prev!.map(item => item._id === props.postToUpdate?._id ? {...updatedPost!, user: props.postToUpdate?.user} : item))
         if(props.finishUpdate) props.finishUpdate()
       })
+      toast.info("Post updated")
     }
   }
 

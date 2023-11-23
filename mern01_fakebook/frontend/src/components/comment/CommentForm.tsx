@@ -4,6 +4,7 @@ import { AuthContext } from "@/context/AuthContext"
 import { CommentModel } from "@/model/commentModel"
 import { CommentService } from "@/service/commentService"
 import { PostModel } from "@/model/postModel"
+import { toast } from "react-toastify"
 
 interface CommentFormProps {
   create: boolean,
@@ -32,11 +33,13 @@ const CommentForm = (props: CommentFormProps) => {
         props.setCommentCount(prev => prev + 1)
         reset()
       })
+      toast.info('Comment created')
     } else {
       CommentService.updateComment(data, props.commentToUpdate?._id!).then(updatedComment => {
         props.setComments(prev => prev!.map(item => item._id === props.commentToUpdate?._id ? {...updatedComment!, user: props.commentToUpdate?.user!, post: props.post} : item))
         if(props.finishUpdate) props.finishUpdate()
       })
+      toast.info('Comment updated')
     }
   }
 
