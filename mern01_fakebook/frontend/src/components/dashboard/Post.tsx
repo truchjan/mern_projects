@@ -75,7 +75,7 @@ const Post = (props: PostProps) => {
   }
 
   return (
-    <div className="flex flex-col bg-gray-100 rounded-lg mt-6 w-full max-w-2xl shadow-[0_0_10px_0_rgb(0,0,0,0.3)]">
+    <div className="flex flex-col bg-gray-100 rounded-lg mb-6 md:min-w-[32rem] max-w-3xl shadow-[0_0_10px_0_rgb(0,0,0,0.3)]">
       
       <div className="flex justify-between items-center px-4 py-1">
         <div className="flex items-center">
@@ -84,7 +84,7 @@ const Post = (props: PostProps) => {
             <img className="w-8 h-8 object-cover rounded-full cursor-pointer" src={props.post.user?.imageURL} alt="profile pic" referrerPolicy="no-referrer" />
           </Link>
           <Link to={`${PATH_USERS}/${props.post.user?._id}`} className="text-black no-underline">
-            <p className="m-1 cursor-pointer">{props.post.user?.name}</p>
+            <p className="m-1 cursor-pointer hover:underline">{props.post.user?.name}</p>
           </Link>
           <div className="px-2 py-1 text-xs text-gray-500">
             {`posted on ${createdAt}${updated}`}

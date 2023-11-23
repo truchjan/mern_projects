@@ -17,7 +17,7 @@ const AppDropdown = () => {
   
   return (
     <div className="mr-4 relative" ref={ref}>
-        <div className="overflow-hidden cursor-pointer text-2xl flex justify-center hover:text-white hover:bg-black rounded-full p-1" onClick={() => setOpen(prev => !prev)}>
+        <div className="overflow-hidden cursor-pointer text-2xl flex justify-center hover:text-white hover:bg-black rounded-full p-2" onClick={() => setOpen(prev => !prev)}>
           <IoIosSettings />
         </div>
 

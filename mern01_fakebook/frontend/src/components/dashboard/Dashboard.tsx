@@ -24,7 +24,9 @@ const Dashboard = () => {
   return (
     <div className="flex flex-col items-center my-4">
       <PostForm create={true} posts={posts} setPosts={setPosts} />
-      <PostList posts={posts} setPosts={setPosts} />
+      <div className="mx-2">
+        <PostList posts={posts} setPosts={setPosts} />
+      </div>
     </div>
   )
 }

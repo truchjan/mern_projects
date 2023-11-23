@@ -16,7 +16,7 @@ const PostList = (props: PostListProps) => {
   }, [props.posts])
 
   return (
-    <div className="flex flex-col items-center w-full">
+    <div className="flex flex-col w-full">
       {!loading && props.posts!.map((post: PostModel) => <Post key={post._id} post={post} posts={props.posts} setPosts={props.setPosts} />)}
     </div>
   )

@@ -3,6 +3,7 @@ import { useContext } from "react"
 import { AuthContext } from "@/context/AuthContext"
 import { PATH_DASHBOARD, PATH_USERS } from "@/components/MainRouter"
 import AppDropdown from "./AppDropdown"
+import FriendRequestsDropdown from "@/components/FriendRequestsDropdown"
 
 const AppNavbar = () => {
 
@@ -21,7 +22,9 @@ const AppNavbar = () => {
             <img className="w-8 h-8 object-cover rounded-full hover:bg-black p-1" src={authContext?.loggedUser?.imageURL} alt="profile picture" referrerPolicy="no-referrer" />
           </Link>
 
+          <FriendRequestsDropdown />
           <AppDropdown />
+
         </div>
 
       </div>

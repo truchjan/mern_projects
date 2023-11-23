@@ -41,7 +41,7 @@ const CommentForm = (props: CommentFormProps) => {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={"flex flex-col w-full max-w-2xl items-center bg-gray-100"}>
+    <form onSubmit={handleSubmit(onSubmit)} className={"flex flex-col w-full max-w-3xl items-center bg-gray-100"}>
 
       <textarea className={"border-none resize-none mt-2 p-2 h-16 w-11/12 focus:outline-none font-montserrat bg-gray-100"}
         placeholder="Add comment"
