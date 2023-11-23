@@ -10,7 +10,6 @@ příprave fe
 16. smajlíci v textu nějaká knihovna?
 17. vyhledávač účtů na navbaru?
 18. pořešit random změny šířek post a friendlist
-19. friend requests dropdown
 
 be
 1. tests

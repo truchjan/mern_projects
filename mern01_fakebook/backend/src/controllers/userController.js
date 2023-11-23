@@ -3,13 +3,13 @@ const User = require('../models/user')
 const Post = require('../models/post')
 
 exports.userList = asyncHandler(async (req, res, next) => {
-  const users = await User.find().sort({ name: 1 }).populate('friends posts requestedFriends')
+  const users = await User.find().sort({ name: 1 }).populate('friends posts requestedFriends friendRequests.user')
   res.json(users)
 })
 
 exports.userDetail = asyncHandler(async (req, res, next) => {
   try {
-    const user = await User.findById(req.params.id).populate('friends posts requestedFriends')
+    const user = await User.findById(req.params.id).populate('friends posts requestedFriends friendRequests.user')
     if(user) {
       res.json(user)
     } else {

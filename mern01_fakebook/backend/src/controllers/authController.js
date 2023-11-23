@@ -24,7 +24,7 @@ const updateUserData = async (req, res) => {
   const options = { upsert: true, new: true }
 
   try {
-    const updatedUser = await User.findOneAndUpdate(filter, {authTime: req.user.auth_time}, options).populate('friends requestedFriends')
+    const updatedUser = await User.findOneAndUpdate(filter, {authTime: req.user.auth_time}, options).populate('friends friendRequests.user requestedFriends')
     return res.status(200).send({ user: updatedUser })
   } catch(err) {
     return res.status(400).send({ message: err})

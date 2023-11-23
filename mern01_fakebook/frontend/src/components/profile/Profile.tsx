@@ -8,8 +8,8 @@ import { PostModel } from "@/model/postModel"
 import PostList from "@/components/dashboard/PostList"
 import FriendList from "@/components/profile/FriendList"
 import { FaUserPlus } from "react-icons/fa"
-import { FaCheck } from "react-icons/fa";
-import { FriendRequestStatusEnum } from "./enum/FriendRequestStatusEnum"
+import { FaCheck } from "react-icons/fa"
+import { FriendRequestStatusEnum } from "@/components/profile/enum/FriendRequestStatusEnum"
 
 const Profile = () => {
 
@@ -28,21 +28,14 @@ const Profile = () => {
       UserService.userDetail(params.userId!).then(item => {
         setUser(item)
         setLoading(false)
-        // authContext?.loggedUser?.requestedFriends?.forEach(item => item._id === params.userId && setFriendRequestStatus(FriendRequestStatusEnum.Sent))
-        // authContext?.loggedUser?.friendRequests?.forEach(item => item.user === params.userId && setFriendRequestStatus(FriendRequestStatusEnum.Recieved))
-        // authContext?.loggedUser?.friends?.forEach(item => item._id === params.userId && setFriendRequestStatus(FriendRequestStatusEnum.Friends))
       })
       UserService.getUserPosts(params.userId!).then(item => setPosts(item))
     }
   }, [authContext?.authenticated, params.userId])
 
   useEffect(() => {
-    // authContext?.loggedUser?.requestedFriends?.forEach(item => item._id === user?._id && setFriendRequestStatus(FriendRequestStatusEnum.Sent))
-    // authContext?.loggedUser?.friendRequests?.forEach(item => item.user === user?._id && setFriendRequestStatus(FriendRequestStatusEnum.Recieved))
-    // authContext?.loggedUser?.friends?.forEach(item => item._id === user?._id && setFriendRequestStatus(FriendRequestStatusEnum.Friends))
-
     setFriendRequestStatus(FriendRequestStatusEnum.None)
-    user?.friendRequests.forEach(item => item.user === authContext?.loggedUser?._id && setFriendRequestStatus(FriendRequestStatusEnum.Sent))
+    user?.friendRequests.forEach(item => item.user._id === authContext?.loggedUser?._id && setFriendRequestStatus(FriendRequestStatusEnum.Sent))
     user?.requestedFriends.forEach(item => item._id === authContext?.loggedUser?._id && setFriendRequestStatus(FriendRequestStatusEnum.Recieved))
     user?.friends.forEach(item => item._id === authContext?.loggedUser?._id && setFriendRequestStatus(FriendRequestStatusEnum.Friends))
   }, [user])
