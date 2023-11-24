@@ -22,16 +22,23 @@ exports.userDetail = asyncHandler(async (req, res, next) => {
 
 exports.updateUserDetail = asyncHandler(async (req, res, next) => {
   try {
+
+    // mongoose findByIdAndUpdate deletes all refs to the same model - this helps keep then
+    const oldUser = await User.findById(req.params.id)
+
     const user = new User({
       name: req.body.name,
       imageURL: req.body.imageURL,
       about: req.body.about,
+      friends: oldUser.friends,
+      friendRequests: oldUser.friendRequests,
       _id: req.params.id, // This is required, or a new ID will be assigned!
     })
     // {new: true} - method returns document AFTER the update
     // {runValidators: true} - turns on validators defined in model
     const updatedUser = await User.findByIdAndUpdate(req.params.id, user, {new: true, runValidators: true})
-    
+    console.log(updatedUser)
+
     if(updatedUser) {
       res.json(updatedUser)
     } else {

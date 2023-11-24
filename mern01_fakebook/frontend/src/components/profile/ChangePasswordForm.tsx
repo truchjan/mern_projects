@@ -5,6 +5,7 @@ import { useContext, useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { useForm } from "react-hook-form"
 import { PATH_ROOT, PATH_USERS } from "../MainRouter"
+import { toast } from "react-toastify"
 
 const ChangePasswordForm = () => {
 
@@ -35,6 +36,7 @@ const ChangePasswordForm = () => {
     if(getValues("password") === getValues("repeatPassword")) {
       authContext?.changePassword(data.password).then(() => {
         navigate(`${PATH_USERS}/${user?._id}`)
+        toast.info("Password changed")
       }).catch(err => {
         if(err.toString().startsWith('FirebaseError: Firebase: Password should be at least 6 characters')) setError('Password should be at least 6 characters')
         if(err.toString().startsWith('FirebaseError: Firebase: Error (auth/requires-recent-login)')) setError('Recent login required for security purposes, please log in and out and try again')
