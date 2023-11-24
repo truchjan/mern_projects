@@ -6,6 +6,7 @@ import ResetPassword from "@/components/auth/ResetPassword"
 import Dashboard from "@/components/dashboard/Dashboard"
 import Profile from "@/components/profile/Profile"
 import ProfileUpdateForm from "@/components/profile/ProfileUpdateForm"
+import ChangePasswordForm from "@/components/profile/ChangePasswordForm"
 
 export const PATH_ROOT = '/'
 export const PATH_RESET_PASSWORD = '/reset'
@@ -29,7 +30,11 @@ const MainRouter = () => {
         {
           path: `${PATH_USERS}/:userId/update`,
           element: <ProfileUpdateForm />
-        }         
+        },
+        {
+          path: `${PATH_USERS}/:userId/changepassword`,
+          element: <ChangePasswordForm />
+        }
       ]
     },
     {

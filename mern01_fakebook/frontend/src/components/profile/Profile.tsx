@@ -116,7 +116,7 @@ const Profile = () => {
   return (
     <div className="flex justify-center">
       {!loading && 
-      <div className="grid sm:grid-cols-4">
+      <div className="grid sm:grid-cols-4 w-5/6 max-w-6xl">
         <div className="sm:col-span-3 flex ml-8 my-4">
           <img className="w-32 h-32 object-cover rounded-full" src={user?.imageURL} alt="profile picture" referrerPolicy="no-referrer" />
           <div className="ml-4">
