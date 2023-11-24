@@ -79,7 +79,7 @@ const Post = (props: PostProps) => {
   }
 
   return (
-    <div className="flex flex-col bg-gray-100 rounded-lg mb-6 md:min-w-[32rem] max-w-3xl shadow-[0_0_10px_0_rgb(0,0,0,0.3)]">
+    <div className="flex flex-col bg-gray-100 rounded-lg mb-6 shadow-[0_0_10px_0_rgb(0,0,0,0.3)]">
       
       <div className="flex justify-between items-center px-4 py-1">
         <div className="flex items-center">

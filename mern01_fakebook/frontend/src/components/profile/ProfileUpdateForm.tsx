@@ -4,7 +4,7 @@ import { UserService } from "@/service/userService"
 import { useContext, useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { useForm } from "react-hook-form"
-import { PATH_USERS } from "../MainRouter"
+import { PATH_ROOT, PATH_USERS } from "@/components/MainRouter"
 
 const ProfileUpdateForm = () => {
 
@@ -24,6 +24,7 @@ const ProfileUpdateForm = () => {
   })
 
   useEffect(() => {
+    if(localStorage.getItem('loggedIn') === 'false') navigate(PATH_ROOT)
     if(authContext?.authenticated) {
       UserService.userDetail(params.userId!).then(item => {
         setValue("name", item?.name!)
@@ -46,7 +47,7 @@ const ProfileUpdateForm = () => {
   }
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center mx-4">
       <h1>Update profile</h1>
       <form onSubmit={handleSubmit(onSubmit)} className={"flex flex-col w-full max-w-xl items-left rounded-xl bg-white"}>
 

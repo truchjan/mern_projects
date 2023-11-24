@@ -1,4 +1,4 @@
-import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth"
+import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updatePassword } from "firebase/auth"
 import { createContext, useState, useEffect } from "react"
 import { AuthService } from "@/service/authService"
 import { setAccessToken } from "@/utils/accessTokenStorage"
@@ -23,6 +23,7 @@ type AuthContextType = {
   loginWithEmailAndPassword: (email: string, password: string) => Promise<void>,
   registerWithEmailAndPassword: (email: string, password: string) => Promise<void>,
   sendPasswordReset: (email: string) => Promise<void>,
+  changePassword: (password: string) => Promise<void>,
   logout: () => Promise<void>
 }
 
@@ -72,6 +73,10 @@ export const AuthContextProvider = ({children}: AuthContextProviderProps) => {
     await sendPasswordResetEmail(firebaseAuth, email)
   }
 
+  const changePassword = async (password: string) => {
+    await updatePassword(firebaseAuth.currentUser!, password)
+  }
+
   const logout = async () => {
     await signOut(firebaseAuth).then(() => {
       setAccessToken('')
@@ -82,7 +87,8 @@ export const AuthContextProvider = ({children}: AuthContextProviderProps) => {
 
   return (
       <AuthContext.Provider value={{authenticated, setAuthenticated, loggedUser, setLoggedUser,
-          loginWithGoogle, loginWithEmailAndPassword, registerWithEmailAndPassword, sendPasswordReset, logout}}>
+          loginWithGoogle, loginWithEmailAndPassword, registerWithEmailAndPassword, sendPasswordReset,
+          changePassword, logout}}>
         {children}
       </AuthContext.Provider>
   )

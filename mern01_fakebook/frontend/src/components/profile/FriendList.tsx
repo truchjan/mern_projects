@@ -22,7 +22,7 @@ const FriendList = (props: FriendListProps) => {
   })
 
   return (
-    <div className="bg-gradient-to-r from-indigo-200 to-purple-300 rounded-lg lg:min-w-[16rem]">
+    <div className="bg-gradient-to-r from-indigo-200 to-purple-300 rounded-lg">
       <h3 className="my-0 py-3 px-2 bg-gradient-to-r from-indigo-300 to-purple-400 rounded-t-lg">Friends</h3>
 
       <div className="py-3">
