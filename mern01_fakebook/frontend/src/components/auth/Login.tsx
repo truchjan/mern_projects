@@ -20,19 +20,25 @@ const Login = () => {
     }
   }, [authContext?.authenticated])
 
-  const {register, handleSubmit, formState: {errors}} = useForm({
+  const {register, handleSubmit, formState: {errors}, getValues} = useForm({
     defaultValues: {
       email: "",
-      password: ""
+      password: "",
+      repeatPassword: ""
     }
   })
 
   const onSubmit = (data: any) => {
     if(isSignup) {
-      authContext?.registerWithEmailAndPassword(data.email, data.password).then().catch(err => {
-        if(err.toString().startsWith('FirebaseError: Firebase: Error (auth/email-already-in-use)')) setError('Email already in use')
-        if(err.toString().startsWith('FirebaseError: Firebase: Password should be at least 6 characters')) setError('Password should be at least 6 characters')
-      })
+      if(getValues("password") === getValues("repeatPassword")) {
+        authContext?.registerWithEmailAndPassword(data.email, data.password).then().catch(err => {
+          if(err.toString().startsWith('FirebaseError: Firebase: Error (auth/email-already-in-use)')) setError('Email already in use')
+          if(err.toString().startsWith('FirebaseError: Firebase: Password should be at least 6 characters')) setError('Password should be at least 6 characters')
+        })
+      } else {
+        setError('Passwords do not match')
+      }
+      
     } else {
       authContext?.loginWithEmailAndPassword(data.email, data.password).then().catch(() => {
         setError('Invalid login credentials')
@@ -50,6 +56,7 @@ const Login = () => {
       <div className="flex flex-col p-4 items-center shadow-[0_0_10px_3px_rgb(0,0,0,0.3)] rounded-xl max-w-sm w-1/2">
 
         <h1 className="rotate-6 mb-8">Fakebook</h1>
+        <h3 className="mb-0">{isSignup ? 'Sign up' : 'Log in'}</h3>
 
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col w-full">
 
@@ -64,6 +71,16 @@ const Login = () => {
             {...register("password", {required: "This field is required"})}
           />
           {errors.password && <p className="mx-2 my-0 text-rose-600 text-sm">{errors.password.message}</p>}
+
+          {isSignup && 
+            <div className="ml-2 mr-6">
+              <p className="mx-2 mt-4 mb-0">Repeat Password</p>
+              <input type="password" className="border border-black rounded-2xl p-2 bg-indigo-100 font-montserrat w-full"
+                {...register("repeatPassword", {required: "This field is required"})}
+              />
+              {errors.repeatPassword && <p className="mx-2 my-0 text-rose-600 text-sm">{errors.repeatPassword.message}</p>}
+            </div>
+          }
 
           <button type="submit" className="mb-2 mt-4 mx-2 h-8 border rounded-2xl bg-transparent cursor-pointer hover:bg-black hover:text-white font-montserrat font-bold">
             {isSignup ? 'Sign up' : 'Log in'}
