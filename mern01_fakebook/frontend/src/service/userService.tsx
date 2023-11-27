@@ -6,6 +6,23 @@ export namespace UserService {
 
   const api = process.env.NODE_ENV === 'development' ? 'http://localhost:3000/api/users' : 'https://firebase-messageboard-api.onrender.com/api/users'
 
+  export async function userList(): Promise<UserModel[]> {
+    try {
+      const response = await fetch(`${api}`, {
+        headers: {
+          'Authorization': `Bearer ${getAccessToken()}`
+        },
+        credentials: 'include'
+      })
+
+      if(response.status === 403) return []
+
+      return response.json()
+    } catch(error) {
+      return []
+    }
+  }
+
   export async function userDetail(id: string): Promise<UserModel | null> {
     try {
       const response = await fetch(`${api}/${id}`, {
