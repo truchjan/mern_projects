@@ -37,7 +37,6 @@ exports.updateUserDetail = asyncHandler(async (req, res, next) => {
     // {new: true} - method returns document AFTER the update
     // {runValidators: true} - turns on validators defined in model
     const updatedUser = await User.findByIdAndUpdate(req.params.id, user, {new: true, runValidators: true})
-    console.log(updatedUser)
 
     if(updatedUser) {
       res.json(updatedUser)
