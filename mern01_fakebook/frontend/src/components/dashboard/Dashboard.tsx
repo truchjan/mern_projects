@@ -7,6 +7,7 @@ import { AuthContext } from "@/context/AuthContext"
 import { PATH_ROOT } from "@/components/MainRouter"
 import { PostService } from "@/service/postService"
 import UserFilter from "@/components/dashboard/UserFilter"
+import LoadingOval from "@/components/LoadingOval"
 
 const Dashboard = () => {
 
@@ -28,7 +29,7 @@ const Dashboard = () => {
 
   return (
     <div className="flex justify-center m-4">
-      {!loading &&
+      {!loading ?
       <div className="grid sm:grid-cols-4 w-5/6 max-w-6xl">
         <div className="flex flex-col items-center">
           <img className="w-28 h-28 object-cover rounded-full" src={authContext?.loggedUser?.imageURL} alt="profile picture" referrerPolicy="no-referrer" />
@@ -46,7 +47,7 @@ const Dashboard = () => {
         <div className="sm:col-span-3">
           <PostList posts={posts} setPosts={setPosts} />
         </div>
-      </div>}
+      </div> : <LoadingOval />}
     </div>
   )
 }

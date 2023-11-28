@@ -21,7 +21,7 @@ const AppNavbar = () => {
 
         <div className="flex items-center">
           <Link to={`${PATH_USERS}/${authContext?.loggedUser?._id}`}>
-            <img className="w-8 h-8 object-cover rounded-full hover:bg-black p-1" src={authContext?.loggedUser?.imageURL} alt="profile picture" referrerPolicy="no-referrer" />
+            {authContext?.loggedUser && <img className="w-8 h-8 object-cover rounded-full hover:bg-black p-1" src={authContext?.loggedUser?.imageURL} alt="profile picture" referrerPolicy="no-referrer" />}
           </Link>
 
           <FriendRequestsDropdown />

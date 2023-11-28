@@ -5,6 +5,7 @@ import { PATH_DASHBOARD, PATH_RESET_PASSWORD } from "@/components/MainRouter"
 import { useForm } from "react-hook-form"
 import { BsGoogle } from "react-icons/bs"
 import { getRandomUser } from "@/utils/getRandomUser"
+import LoadingOval from "@/components/LoadingOval"
 
 // remove user must be done manualy from mongodb as well as firebase->Authentication->Users
 const Login = () => {
@@ -13,6 +14,7 @@ const Login = () => {
   const navigate = useNavigate()
   const [error, setError] = useState<string>()
   const [isSignup, setIsSignup] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     if(authContext?.authenticated) {
@@ -29,6 +31,7 @@ const Login = () => {
   })
 
   const onSubmit = (data: any) => {
+    setLoading(true)
     if(isSignup) {
       if(getValues("password") === getValues("repeatPassword")) {
         authContext?.registerWithEmailAndPassword(data.email, data.password).then().catch(err => {
@@ -46,13 +49,20 @@ const Login = () => {
     }
   }
 
+  function loginWithGoogle() {
+    setLoading(true)
+    authContext?.loginWithGoogle()
+  }
+
   function loginAsExampleUser() {
+    setLoading(true)
     const user = getRandomUser()
     authContext?.loginWithEmailAndPassword(user.email, user.password)
   }
 
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-gradient-to-r from-indigo-200 to-purple-300">
+      {!loading ? 
       <div className="flex flex-col p-4 items-center shadow-[0_0_10px_3px_rgb(0,0,0,0.3)] rounded-xl max-w-sm w-1/2">
 
         <h1 className="rotate-6 mb-8">Fakebook</h1>
@@ -98,7 +108,7 @@ const Login = () => {
           </button>
 
           <button className="mt-2 mx-2 h-8 border rounded-2xl bg-transparent cursor-pointer hover:bg-black hover:text-white font-montserrat font-bold"
-            onClick={() => authContext?.loginWithGoogle()}>
+            onClick={() => loginWithGoogle()}>
               <div className="flex justify-center items-center">
                 <BsGoogle />
                 <p className="m-0 ml-2">Login with Google</p>
@@ -111,7 +121,7 @@ const Login = () => {
           </button>
           
         </div>
-      </div>
+      </div> : <LoadingOval />}
       
     </div>
   )
