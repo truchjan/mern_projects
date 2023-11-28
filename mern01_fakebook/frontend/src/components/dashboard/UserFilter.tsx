@@ -46,7 +46,7 @@ const UserFilter = () => {
   })
 
   return (
-    <div className="bg-gradient-to-r from-indigo-200 to-purple-300 rounded-lg">
+    <div className="bg-gradient-to-r from-indigo-200 to-purple-300 rounded-lg w-full">
 
       <div className="px-2 bg-gradient-to-r from-indigo-300 to-purple-400 rounded-t-lg">
         <h3 className="my-0 py-3 px-1">Active Users</h3>

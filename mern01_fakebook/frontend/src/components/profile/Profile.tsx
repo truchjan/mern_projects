@@ -117,8 +117,8 @@ const Profile = () => {
   return (
     <div className="flex justify-center">
       {!loading ?
-      <div className="grid sm:grid-cols-4 w-5/6 max-w-6xl">
-        <div className="sm:col-span-3 flex ml-8 my-4">
+      <div className="grid md:grid-cols-4 w-5/6 max-w-6xl">
+        <div className="md:col-span-3 flex ml-8 my-4">
           <img className="w-32 h-32 object-cover rounded-full" src={user?.imageURL} alt="profile picture" referrerPolicy="no-referrer" />
           <div className="ml-4">
             <h2 className="mt-4 mb-1">{user?.name}</h2>
@@ -138,7 +138,7 @@ const Profile = () => {
           <FriendList user={user!} />
         </div>
         
-        <div className="sm:col-span-3 mx-2">
+        <div className="md:col-span-3 mx-2">
           <PostList posts={posts} setPosts={setPosts} />
         </div>
 

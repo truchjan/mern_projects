@@ -30,21 +30,21 @@ const Dashboard = () => {
   return (
     <div className="flex justify-center m-4">
       {!loading ?
-      <div className="grid sm:grid-cols-4 w-5/6 max-w-6xl">
+      <div className="grid md:grid-cols-4 w-5/6 max-w-6xl">
         <div className="flex flex-col items-center">
           <img className="w-28 h-28 object-cover rounded-full" src={authContext?.loggedUser?.imageURL} alt="profile picture" referrerPolicy="no-referrer" />
-          <h2 className="my-3">{authContext?.loggedUser?.name}</h2>
+          <h2 className="my-3 whitespace-nowrap overflow-hidden text-ellipsis">{authContext?.loggedUser?.name}</h2>
         </div>
 
-        <div className="sm:col-span-3">
+        <div className="mx-2 md:col-span-3">
           <PostForm create={true} posts={posts} setPosts={setPosts} />
         </div>
 
-        <div className="mr-4">
+        <div className="mx-2 mb-4">
           <UserFilter />
         </div>
 
-        <div className="sm:col-span-3">
+        <div className="mx-2 md:col-span-3">
           <PostList posts={posts} setPosts={setPosts} />
         </div>
       </div> : <LoadingOval />}

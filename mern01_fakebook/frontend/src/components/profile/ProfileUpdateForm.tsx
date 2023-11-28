@@ -65,6 +65,7 @@ const ProfileUpdateForm = () => {
               disabled={false}
             />
             {errors.imageURL && <p className="text-rose-600 text-sm mt-1">{errors.imageURL.message}</p>}
+            <p className="text-xs">NOTE: Not all URLs will be accepted for security reasons.</p>
           </div>
         </div>
 
