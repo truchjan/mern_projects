@@ -11,6 +11,7 @@ import { FaUserPlus } from "react-icons/fa"
 import { FaCheck } from "react-icons/fa"
 import { FriendRequestStatusEnum } from "@/components/profile/enum/FriendRequestStatusEnum"
 import { toast } from "react-toastify"
+import LoadingOval from "@/components/LoadingOval"
 
 const Profile = () => {
 
@@ -115,7 +116,7 @@ const Profile = () => {
   // sm:tailwind-class happens only on screens of sm(640px) and wider, same goes for md:, lg: etc
   return (
     <div className="flex justify-center">
-      {!loading && 
+      {!loading ?
       <div className="grid sm:grid-cols-4 w-5/6 max-w-6xl">
         <div className="sm:col-span-3 flex ml-8 my-4">
           <img className="w-32 h-32 object-cover rounded-full" src={user?.imageURL} alt="profile picture" referrerPolicy="no-referrer" />
@@ -141,7 +142,7 @@ const Profile = () => {
           <PostList posts={posts} setPosts={setPosts} />
         </div>
 
-      </div>}
+      </div> : <LoadingOval />}
     </div>
   )
 }
