@@ -22,11 +22,7 @@ const CommentList = (props: PostProps) => {
       setLoading(false)
     })
   }, [])
-
-  // useEffect(() => {
-  //   if(comments && comments.length > 0) setLoading(false)
-  // }, [comments])
-
+  
   return (
     <div>
       <CommentForm create={true} post={props.post} comments={comments} setComments={setComments} setCommentCount={props.setCommentCount} />
