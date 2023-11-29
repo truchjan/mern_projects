@@ -4,7 +4,7 @@ import { getAccessToken } from "@/utils/accessTokenStorage"
 
 export namespace PostService {
 
-  const api = process.env.NODE_ENV === 'development' ? 'http://localhost:3000/api/posts' : 'https://firebase-postboard-api.onrender.com/api/posts'
+  const api = process.env.NODE_ENV === 'development' ? 'http://localhost:3000/api/posts' : 'https://fakebook-api-fj7i.onrender.com/api/posts'
 
   export async function postList(): Promise<PostModel[]> {
     try {
