@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form"
 import { BsGoogle } from "react-icons/bs"
 import { getRandomUser } from "@/utils/getRandomUser"
 import LoadingOval from "@/components/LoadingOval"
+import { toast } from "react-toastify"
 
 // remove user must be done manualy from mongodb as well as firebase->Authentication->Users
 const Login = () => {
@@ -19,6 +20,9 @@ const Login = () => {
   useEffect(() => {
     if(authContext?.authenticated) {
       navigate(PATH_DASHBOARD)
+      if(authContext.loggedUser?.name.includes('@')) {
+        toast.error('Please change your username in Settings > Update Profile')
+      }
     }
   }, [authContext?.authenticated])
 
@@ -37,14 +41,17 @@ const Login = () => {
         authContext?.registerWithEmailAndPassword(data.email, data.password).then().catch(err => {
           if(err.toString().startsWith('FirebaseError: Firebase: Error (auth/email-already-in-use)')) setError('Email already in use')
           if(err.toString().startsWith('FirebaseError: Firebase: Password should be at least 6 characters')) setError('Password should be at least 6 characters')
+          setLoading(false)
         })
       } else {
         setError('Passwords do not match')
+        setLoading(false)
       }
       
     } else {
       authContext?.loginWithEmailAndPassword(data.email, data.password).then().catch(() => {
         setError('Invalid login credentials')
+        setLoading(false)
       })
     }
   }

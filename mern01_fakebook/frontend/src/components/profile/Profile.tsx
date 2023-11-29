@@ -139,7 +139,8 @@ const Profile = () => {
         </div>
         
         <div className="md:col-span-3 mx-2">
-          <PostList posts={posts} setPosts={setPosts} />
+          <h2 className="text-center">{`Posts of ${user?.name}`}</h2>
+          {posts?.length === 0 ? <p className="text-center">Go to the dashboard and share something!</p> : <PostList posts={posts} setPosts={setPosts} />}
         </div>
 
       </div> : <LoadingOval />}
