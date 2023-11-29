@@ -1,7 +1,7 @@
 export namespace AuthService {
 
   // TODO - change to deployed render web service
-  const api = process.env.NODE_ENV === 'development' ? 'http://localhost:3000/auth' : 'https://firebase-messageboard-api.onrender.com/auth'
+  const api = process.env.NODE_ENV === 'development' ? 'http://localhost:3000/auth' : 'https://fakebook-api-fj7i.onrender.com/auth'
 
   export async function validateUser(token: string) {
     const response = await fetch(`${api}/login`, {

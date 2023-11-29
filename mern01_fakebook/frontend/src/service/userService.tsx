@@ -4,7 +4,7 @@ import { getAccessToken } from "@/utils/accessTokenStorage"
 
 export namespace UserService {
 
-  const api = process.env.NODE_ENV === 'development' ? 'http://localhost:3000/api/users' : 'https://firebase-messageboard-api.onrender.com/api/users'
+  const api = process.env.NODE_ENV === 'development' ? 'http://localhost:3000/api/users' : 'https://fakebook-api-fj7i.onrender.com/api/users'
 
   export async function userList(): Promise<UserModel[]> {
     try {

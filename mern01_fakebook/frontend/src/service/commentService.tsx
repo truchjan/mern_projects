@@ -3,7 +3,7 @@ import { getAccessToken } from "@/utils/accessTokenStorage"
 
 export namespace CommentService {
 
-  const api = process.env.NODE_ENV === 'development' ? 'http://localhost:3000/api/comments' : 'https://firebase-postboard-api.onrender.com/api/comments'
+  const api = process.env.NODE_ENV === 'development' ? 'http://localhost:3000/api/comments' : 'https://fakebook-api-fj7i.onrender.com/api/comments'
 
   export async function createComment(userId: string, postId: string, comment: CommentModel): Promise<CommentModel | null> {
     const data = {text: comment.text, user: userId, post: postId}
