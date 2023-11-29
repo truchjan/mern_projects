@@ -7,6 +7,7 @@ Currently there is only one, but more will follow.
 - databse - MongoDB
 - backend - NodeJS with Express
 - frontend - React
+- styling - Tailwind
 - authentication - Firebase
 
 ## deployed version
