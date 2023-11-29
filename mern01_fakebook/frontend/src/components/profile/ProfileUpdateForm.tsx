@@ -41,6 +41,7 @@ const ProfileUpdateForm = () => {
       if(response.ok) {
         UserService.updateUser(data, user?._id!).then(item => {
           navigate(`${PATH_USERS}/${item?._id}`)
+          authContext?.setLoggedUser(item)
         })
       }
     }).catch(() => setError('Profile picture URL invalid'))
