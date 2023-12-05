@@ -13,5 +13,6 @@ Currently there is only one, but more will follow.
 ## deployed version
 Projects are deployed on render.com
 - IMPORTANT - render's free tier puts services to sleep after 15 minutes of inactivity. This means that the first loading of the application will take a long time. Please be patient
+- if you run into any trouble while running the projects, please contact me at truchjan0@gmail.com
 
 Fakebook: https://fakebook-jr40.onrender.com/
