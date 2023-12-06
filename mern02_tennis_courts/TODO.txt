@@ -1,8 +1,12 @@
 DELETE this file after completion
 
+souhrn
 1. rezervační systém na tennisové kurty na jednom určitém místě
-2. inspirace - hamr nebo neridé
+2. inspirace - hamr nebo neridé nebo smíchoff rezervace
 3. bude tam například 6 kurtů, mohu si vybrat jaký rezervuji a na jak dlouho - předtím mi to ukazuje naplněnost apod
 4. nutnost uživatelského účtu
 5. existuje možnost zrušit rezervaci 24h předem
 6. bude chodit potvrzovací/rušící email
+
+backend
+1. při tvorbě/aktualizace rezervace se kontroluje zda rezervace v tomto čase již neexistuje
