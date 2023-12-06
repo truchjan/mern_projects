@@ -1,0 +1,18 @@
+const express = require("express")
+const router = express.Router()
+
+const courtController = require("../controllers/courtController")
+
+router.get("/", courtController.courtList)
+
+router.get("/:id", courtController.courtDetail)
+
+router.post("/", courtController.createCourt)
+
+router.put("/:id", courtController.updateCourt)
+
+router.delete("/:id", courtController.deleteCourt)
+
+router.get("/:id/reservations", courtController.getCourtReservations)
+
+module.exports = router
