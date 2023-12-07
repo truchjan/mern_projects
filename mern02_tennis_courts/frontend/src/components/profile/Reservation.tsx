@@ -21,7 +21,7 @@ const Reservation = (props: ReservationProps) => {
         </div>
         
         <div className="flex flex-col items-start mx-6 my-4">
-          <p className="text-lg my-0">{`${getTime(props.reservation.from)}-${getTime(props.reservation.to)}`}</p>
+          <p className="text-lg my-0">{`${getTime(props.reservation.from)} - ${getTime(props.reservation.to)}`}</p>
           <p className="mt-2">{`Court No.${props.reservation.court.number}`}</p>
         </div>
       </div>
