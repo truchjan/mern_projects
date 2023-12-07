@@ -17,7 +17,7 @@ const Reservation = (props: ReservationProps) => {
         <div className="flex flex-col items-center mx-6 my-4">
           <p className="text-3xl my-0">{getDay(props.reservation.from)}</p>
           <p className="my-0">{getMonth(props.reservation.from)}</p>
-          <p className=" text-xs my-0">{getYear(props.reservation.from)}</p>
+          <p className="text-xs my-0">{getYear(props.reservation.from)}</p>
         </div>
         
         <div className="flex flex-col items-start mx-6 my-4">
