@@ -91,8 +91,8 @@ const Login = () => {
 
           {isSignup && 
             <div className="ml-2 mr-6">
-              <p className="mx-2 mt-4 mb-0">Repeat Password</p>
-              <input type="password" className="border border-black rounded-2xl p-2 bg-indigo-100 font-montserrat w-full"
+              <p className="mt-4 mb-0">Repeat Password</p>
+              <input type="password" className="border border-black rounded-2xl  mt-2 p-2 bg-indigo-100 font-montserrat w-full"
                 {...register("repeatPassword", {required: "This field is required"})}
               />
               {errors.repeatPassword && <p className="mx-2 my-0 text-rose-600 text-sm">{errors.repeatPassword.message}</p>}
