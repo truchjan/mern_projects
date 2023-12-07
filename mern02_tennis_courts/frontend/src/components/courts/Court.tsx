@@ -14,6 +14,9 @@ const Court = (props: CourtProps) => {
 
   const tdStyle = "px-2 py-4"
 
+  // TODO - projíždí všechny rezervace kurtu (i v daleké minulosti - extrémně neefektivní)
+  // šlo by to udělat pomocí mongoose nějak lépe určitě
+  // například v courtControlleru mít metodu, která hledá rezervace dle {from: něcoJakoStartsWith: date}
   const tdAditionalStyle = (hour: string) => {
     let color = "bg-sky-600"
     props.court.reservations.forEach(item => {

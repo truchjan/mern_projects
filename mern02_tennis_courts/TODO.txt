@@ -2,7 +2,7 @@ DELETE this file after completion
 
 souhrn
 1. existuje možnost zrušit rezervaci 24h předem
-2. bude chodit potvrzovací/rušící email
+2. bude chodit potvrzovací/rušící email - optional
 
 backend
 1. při tvorbě/aktualizace rezervace se kontroluje zda rezervace v tomto čase již neexistuje
