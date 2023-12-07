@@ -2,10 +2,6 @@ import Moment from 'moment'
 
 Moment.locale('en')
 
-export const getDate = (date: Date) => {
-  return Moment(date).format('dddd DD.MM.YYYY')
-}
-
 export const getDay = (date: Date) => {
   return Moment(date).format('DD')
 }

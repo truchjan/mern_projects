@@ -5,6 +5,7 @@ import Login from "@/components/auth/Login"
 import ResetPassword from "@/components/auth/ResetPassword"
 import CourtList from "@/components/courts/CourtList"
 import Profile from "@/components/profile/Profile"
+import ProfileForm from "@/components/profile/ProfileForm"
 
 export const PATH_ROOT = '/'
 export const PATH_RESET_PASSWORD = '/reset'
@@ -24,6 +25,10 @@ const MainRouter = () => {
         {
           path: `${PATH_USERS}/:userId`,
           element: <Profile />
+        },
+        {
+          path: `${PATH_USERS}/:userId/update`,
+          element: <ProfileForm />
         }
       ]
     },

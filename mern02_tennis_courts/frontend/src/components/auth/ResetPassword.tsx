@@ -32,7 +32,7 @@ const ResetPassword = () => {
           />
           {errors.email && <p className="mx-2 my-0 text-rose-600 text-sm">{errors.email.message}</p>}
 
-          <button type="submit" className="mb-2 mt-4 mx-2 h-8 border rounded-sm bg-transparent cursor-pointer hover:bg-lime-300 font-montserrat font-bold">
+          <button type="submit" className="mb-2 mt-4 mx-2 h-8 border rounded-sm bg-gray-200 cursor-pointer hover:bg-lime-300 font-montserrat font-bold">
             {'Send'}
           </button>
         </form>

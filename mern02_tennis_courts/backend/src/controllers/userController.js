@@ -43,7 +43,7 @@ exports.getUserReservations = asyncHandler(async (req, res, next) => {
     const user = await User.findById(req.params.id)
     if(!user) throw new Error("User not found")
 
-    const reservations = await Reservation.find({user: req.params.id}).sort({ createdAt: -1 }).populate("user court")
+    const reservations = await Reservation.find({user: req.params.id}).sort({ from: -1 }).populate("user court")
     res.json(reservations)
 
   } catch(err) {
