@@ -43,7 +43,7 @@ const Profile = () => {
             onClick={() => navigate(`${PATH_USERS}/${authContext?.loggedUser?._id}/update`)} />
         </div>
         <p className="text-xl">Reservations</p>
-        {reservations?.length === 0 ? 'Have not made a reservation yet' : reservationElements}
+        {user?.reservations?.length === 0 ? 'Have not made a reservation yet' : reservationElements}
       </div> : <LoadingOval />}
     </div>
   )
