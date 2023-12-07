@@ -6,7 +6,9 @@ souhrn
 
 backend
 1. při tvorbě/aktualizace rezervace se kontroluje zda rezervace v tomto čase již neexistuje
+2. get rezervace kurtu v určitý den - zde lepší a rychlejší než na FE
 
 frontend
 1. zahezkat vše - především login
 2. na profile stránce implementovat tlačítka update/delete reservation - nelze pokud je blíže než za 24h/už proběhla
+3. jiný loading než oval - vypadá moc podobně jak fakebook
