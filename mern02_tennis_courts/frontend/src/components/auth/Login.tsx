@@ -88,7 +88,7 @@ const Login = () => {
             </div>
           }
 
-          <button type="submit" className="mb-2 mt-4 mx-2 px-4 h-8 border rounded-sm bg-transparent cursor-pointer hover:bg-lime-300 font-montserrat font-bold">
+          <button type="submit" className="mb-2 mt-4 mx-2 px-4 h-8 border rounded-sm bg-gray-200 cursor-pointer hover:bg-lime-300 font-montserrat font-bold">
             {isSignup ? 'Sign up' : 'Log in'}
           </button>
           {error && <p className="mx-2 my-0 text-rose-600 text-sm">{error}</p>}
@@ -96,14 +96,14 @@ const Login = () => {
 
         <p className="mt-1 mb-0 cursor-pointer hover:underline text-xs" onClick={() => navigate(PATH_RESET_PASSWORD)}>Forgot password?</p>
 
-        <div className="mt-2 flex items-center justify-around w-full">
+        <div className="flex flex-col w-full">
 
-          <button className="w-2/5 h-8 border rounded-sm bg-transparent cursor-pointer hover:bg-lime-300 font-montserrat font-bold"
+          <button className="mt-2 mx-2 h-8 border rounded-sm bg-gray-200 cursor-pointer hover:bg-lime-300 font-montserrat font-bold"
             onClick={() => setIsSignup(prev => !prev)}>
               {isSignup ? 'Log in' : 'Sign up with Email'}
           </button>
 
-          <button className="w-2/5 h-8 border rounded-sm bg-transparent cursor-pointer hover:bg-lime-300 font-montserrat font-bold"
+          <button className="mt-2 mx-2 h-8 border rounded-sm bg-gray-200 cursor-pointer hover:bg-lime-300 font-montserrat font-bold"
             onClick={() => loginWithGoogle()}>
               <div className="flex justify-center items-center">
                 <BsGoogle />

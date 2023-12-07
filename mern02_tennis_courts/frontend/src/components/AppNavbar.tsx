@@ -1,7 +1,7 @@
 import { Link, Outlet, useNavigate } from "react-router-dom"
 import { useContext } from "react"
 import { AuthContext } from "@/context/AuthContext"
-import { PATH_COURTS, PATH_ROOT } from "@/components/MainRouter"
+import { PATH_COURTS, PATH_ROOT, PATH_USERS } from "@/components/MainRouter"
 import { ToastContainer } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css'
 
@@ -18,7 +18,7 @@ const AppNavbar = () => {
           Reservations
         </Link>
 
-        <Link to={PATH_COURTS} className="text-lg no-underline text-black rounded-lg hover:bg-lime-500 py-3 px-2">
+        <Link to={`${PATH_USERS}/${authContext?.loggedUser?._id}`} className="text-lg no-underline text-black rounded-lg hover:bg-lime-500 py-3 px-2">
           Profile
         </Link>
 

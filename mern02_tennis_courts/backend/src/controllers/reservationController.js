@@ -3,7 +3,7 @@ const User = require("../models/user")
 const Reservation = require("../models/reservation")
 
 exports.reservationList = asyncHandler(async (req, res, next) => {
-  const reservations = await Reservation.find().sort({ createdAt: -1 }).populate("user court")
+  const reservations = await Reservation.find().sort({ from: -1 }).populate("user court")
   res.json(reservations)
 })
 
