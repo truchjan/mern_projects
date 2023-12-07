@@ -4,10 +4,12 @@ import AppNavbar from "@/components/AppNavbar"
 import Login from "@/components/auth/Login"
 import ResetPassword from "@/components/auth/ResetPassword"
 import CourtList from "@/components/courts/CourtList"
+import Profile from "@/components/profile/Profile"
 
 export const PATH_ROOT = '/'
 export const PATH_RESET_PASSWORD = '/reset'
 export const PATH_COURTS = '/courts'
+export const PATH_USERS = '/users'
 
 const MainRouter = () => {
   const router = createBrowserRouter([
@@ -18,6 +20,10 @@ const MainRouter = () => {
         {
           path: PATH_COURTS,
           element: <CourtList />
+        },
+        {
+          path: `${PATH_USERS}/:userId`,
+          element: <Profile />
         }
       ]
     },

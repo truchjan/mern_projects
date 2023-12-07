@@ -10,3 +10,7 @@ souhrn
 
 backend
 1. při tvorbě/aktualizace rezervace se kontroluje zda rezervace v tomto čase již neexistuje
+
+frontend
+1. zahezkat vše - především login
+2. když manuálně napíšu adressu ůčtu jiného usera, tak mě to hodí na stránku, že toto je cizí účet nebo tak něco

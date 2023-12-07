@@ -1,13 +1,8 @@
 import { ReservationModel } from "@/model/reservationModel"
 
-export interface UserModel {
+export interface CourtModel {
   _id?: string,
-  name: string,
-  email: string,
-  imageURL: string,
-  userId: string,
-  emailVerified: boolean,
-  authTime: string,
+  number: number,
   createdAt: Date,
   updatedAt: Date,
   reservations: ReservationModel[]
