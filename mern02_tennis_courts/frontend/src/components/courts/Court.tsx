@@ -1,7 +1,9 @@
 import { AuthContext } from "@/context/AuthContext";
 import { CourtModel } from "@/model/courtModel";
-import { areDatesOnTheSameDay, getHour } from "@/utils/dateFormatter";
-import { useContext } from "react";
+import { ReservationModel } from "@/model/reservationModel";
+import { CourtService } from "@/service/courtService";
+import { getHour } from "@/utils/dateFormatter";
+import { useContext, useEffect, useState } from "react";
 
 interface CourtProps {
   court: CourtModel,
@@ -12,17 +14,20 @@ const Court = (props: CourtProps) => {
 
   const authContext = useContext(AuthContext)
 
+  const [courtReservationsDay, setCourtReservationsDay] = useState<ReservationModel[]>()
+
+  useEffect(() => {
+    CourtService.getCourtReservationsDay(props.court._id!, props.date).then(item => setCourtReservationsDay(item))
+  }, [])
+
   const tdStyle = "px-2 py-4"
 
-  // TODO - projíždí všechny rezervace kurtu (i v daleké minulosti - extrémně neefektivní)
-  // šlo by to udělat pomocí mongoose nějak lépe určitě
-  // například v courtControlleru mít metodu, která hledá rezervace dle {from: něcoJakoStartsWith: date}
   const tdAditionalStyle = (hour: string) => {
     let color = "bg-sky-600"
-    props.court.reservations.forEach(item => {
-      if(areDatesOnTheSameDay(item.from, props.date) && getHour(item.from) === hour) {
+    courtReservationsDay?.forEach(item => {
+      if(getHour(item.from) === hour) {
         color = "bg-rose-600"
-        if(authContext?.loggedUser?._id === item.user.toString()) color = "bg-green-600"
+        if(authContext?.loggedUser?._id === item.user._id) color = "bg-green-600"
       }
     })
     return color  

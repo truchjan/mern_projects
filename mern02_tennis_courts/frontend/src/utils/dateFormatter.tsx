@@ -25,8 +25,3 @@ export const getHour = (date: Date) => {
 export const getDateFromDatePickerValue = (date: any) => {
   return Moment(date).format('YYYY-MM-DD')
 }
-
-// TODO move to BE - extremely unefective
-export const areDatesOnTheSameDay = (date1: Date, date2: Date) => {
-  return Moment(date1).isSame(date2, 'day')
-}

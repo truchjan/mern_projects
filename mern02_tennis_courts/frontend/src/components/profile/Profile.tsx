@@ -5,8 +5,8 @@ import { useNavigate, useParams } from "react-router-dom"
 import { PATH_COURTS, PATH_ROOT, PATH_USERS } from "@/components/MainRouter"
 import { UserService } from "@/service/userService"
 import { ReservationModel } from "@/model/reservationModel"
-import LoadingOval from "@/components/LoadingOval"
-import Reservation from "@/components/profile/Reservation"
+import LoadingDots from "@/components/LoadingDots"
+import Reservation from "@/components/reservation/Reservation"
 import { FaPen } from "react-icons/fa"
 
 const Profile = () => {
@@ -44,7 +44,7 @@ const Profile = () => {
         </div>
         <p className="text-xl">Reservations</p>
         {user?.reservations?.length === 0 ? 'Have not made a reservation yet' : reservationElements}
-      </div> : <LoadingOval />}
+      </div> : <LoadingDots />}
     </div>
   )
   

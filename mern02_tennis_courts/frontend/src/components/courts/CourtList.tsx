@@ -5,7 +5,7 @@ import { useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { PATH_ROOT } from "@/components/MainRouter"
 import Court from "@/components/courts/Court"
-import LoadingOval from "@/components/LoadingOval"
+import LoadingDots from "@/components/LoadingDots"
 import DatePicker from 'react-date-picker'
 import 'react-date-picker/dist/DatePicker.css'
 import 'react-calendar/dist/Calendar.css'
@@ -39,20 +39,20 @@ const CourtList = () => {
   const thStyle = "p-2"
 
   return (
-    <div className="flex flex-col items-center w-full overflow-x-auto">
-      <div className="flex justify-around w-full">
-        <DatePicker onChange={setDatePickerValue} value={datePickerValue} clearIcon={null} />
-        <button className="px-4 border-none rounded-sm bg-gray-200 cursor-pointer font-montserrat font-bold hover:bg-lime-300"
+    <div className="flex flex-col items-center w-full">
+      <div className="flex justify-between w-full max-w-6xl">
+        <DatePicker onChange={setDatePickerValue} value={datePickerValue} clearIcon={null} className="mx-4" />
+        <button className="px-4 mx-4 border-none rounded-sm bg-gray-200 cursor-pointer font-montserrat font-bold hover:bg-lime-300"
           onClick={() => console.log('make a reservation')}>Make a Reservation</button>
       </div>
       {!loading ?
-      <table className="table-auto">
+      <table className="table-auto w-full max-w-6xl overflow-x-scroll">
         <thead>
           <tr>
             <th className={thStyle}>Court</th>
-            <th className={thStyle}>7:00</th>
-            <th className={thStyle}>8:00</th>
-            <th className={thStyle}>9:00</th>
+            <th className={thStyle}>07:00</th>
+            <th className={thStyle}>08:00</th>
+            <th className={thStyle}>09:00</th>
             <th className={thStyle}>10:00</th>
             <th className={thStyle}>11:00</th>
             <th className={thStyle}>12:00</th>
@@ -69,7 +69,7 @@ const CourtList = () => {
         <tbody>
           {courtElements}
         </tbody>
-      </table> : <LoadingOval />}
+      </table> : <LoadingDots />}
     </div>
   )
 }
