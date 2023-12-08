@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"
 import { PATH_COURTS, PATH_RESET_PASSWORD } from "@/components/MainRouter"
 import { useForm } from "react-hook-form"
 import { BsGoogle } from "react-icons/bs"
-import LoadingOval from "@/components/LoadingOval"
+import LoadingDots from "@/components/LoadingDots"
 
 // remove user must be done manualy from mongodb as well as firebase->Authentication->Users
 const Login = () => {
@@ -111,7 +111,7 @@ const Login = () => {
               </div>
           </button>          
         </div>
-      </div> : <LoadingOval />}
+      </div> : <LoadingDots />}
       
     </div>
   )

@@ -69,7 +69,27 @@ exports.getCourtReservations = asyncHandler(async (req, res, next) => {
     const court = await Court.findById(req.params.id)
     if(!court) throw new Error("Court not found")
 
-    const reservations = await Reservation.find({court: req.params.id}).sort({ createdAt: -1 }).populate("user court")
+    const reservations = await Reservation.find({court: req.params.id}).sort({ from: -1 }).populate("user court")
+    res.json(reservations)
+
+  } catch(err) {
+    res.status(400).json({message: err.message})
+  }
+})
+
+function addOneDay(date) {
+  const newDate = new Date(date)
+  newDate.setDate(newDate.getDate() + 1)
+  return newDate
+}
+
+exports.getCourtReservationsDay = asyncHandler(async (req, res, next) => {
+  try {
+    const court = await Court.findById(req.params.id)
+    if(!court) throw new Error("Court not found")
+
+    const date = new Date(req.params.day)
+    const reservations = await Reservation.find({court: req.params.id, from: {$gte: date, $lt: addOneDay(date)}}).sort({ from: -1 }).populate("user court")
     res.json(reservations)
 
   } catch(err) {

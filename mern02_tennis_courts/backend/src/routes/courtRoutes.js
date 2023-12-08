@@ -15,4 +15,6 @@ router.delete("/:id", courtController.deleteCourt)
 
 router.get("/:id/reservations", courtController.getCourtReservations)
 
+router.get("/:id/reservations/:day", courtController.getCourtReservationsDay)
+
 module.exports = router
