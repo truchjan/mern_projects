@@ -1,7 +1,7 @@
 # mern projects
 This repository contiains some exemplary projects created using MERN stack.
 
-Currently there is only one, but more will follow.
+Currently the Fakebook project is finished, Tennis Courts are in development and more projects will follow.
 
 ## used technology
 - databse - MongoDB
