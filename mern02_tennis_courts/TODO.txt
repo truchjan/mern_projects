@@ -3,6 +3,7 @@ DELETE this file after completion
 full stack
 1. update and delete reservations - only possible 2 days before
 2. reservation email confirmation - optional
+3. cannot make/modify/delete reservations in the past
 
 backend
 1. ???
