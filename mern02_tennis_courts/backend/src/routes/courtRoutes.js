@@ -5,7 +5,7 @@ const courtController = require("../controllers/courtController")
 
 router.get("/", courtController.courtList)
 
-router.get("/:id", courtController.courtDetail)
+router.get("/:number", courtController.courtDetailByNumber)
 
 router.post("/", courtController.createCourt)
 

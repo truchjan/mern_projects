@@ -25,3 +25,8 @@ export const getHour = (date: Date) => {
 export const getDateFromDatePickerValue = (date: any) => {
   return Moment(date).format('YYYY-MM-DD')
 }
+
+export const buildDate = (date: string, time: string) => {
+  const aditionalZero = time === '7' || time === '8' || time === '9'
+  return new Date(date.concat('T', aditionalZero ? '0' : '', time, ':00'))
+}

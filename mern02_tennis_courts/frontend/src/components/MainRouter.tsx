@@ -6,11 +6,13 @@ import ResetPassword from "@/components/auth/ResetPassword"
 import CourtList from "@/components/courts/CourtList"
 import Profile from "@/components/profile/Profile"
 import ProfileForm from "@/components/profile/ProfileForm"
+import ReservationForm from "@/components/reservation/ReservationForm"
 
 export const PATH_ROOT = '/'
 export const PATH_RESET_PASSWORD = '/reset'
 export const PATH_COURTS = '/courts'
 export const PATH_USERS = '/users'
+export const PATH_RESERVATION = '/reservation'
 
 const MainRouter = () => {
   const router = createBrowserRouter([
@@ -29,6 +31,10 @@ const MainRouter = () => {
         {
           path: `${PATH_USERS}/:userId/update`,
           element: <ProfileForm />
+        },
+        {
+          path: PATH_RESERVATION,
+          element: <ReservationForm />
         }
       ]
     },

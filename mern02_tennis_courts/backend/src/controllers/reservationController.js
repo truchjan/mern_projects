@@ -28,6 +28,11 @@ exports.createReservation = asyncHandler(async (req, res, next) => {
       throw new Error("User not found")
     }
 
+    const reservationExists = await Reservation.find({court: req.body.court, from: req.body.from})
+    if(reservationExists.length > 0) {
+      throw new Error("Reservation at this time and court already exists")
+    }
+
     const reservation = new Reservation({
       from: req.body.from,
       to: req.body.to,
@@ -43,6 +48,11 @@ exports.createReservation = asyncHandler(async (req, res, next) => {
 
 exports.updateReservation = asyncHandler(async (req, res, next) => {
   try {
+    const reservationExists = await Reservation.find({court: req.body.court, from: req.body.from})
+    if(reservationExists.length > 0) {
+      throw new Error("Reservation at this time already exists")
+    }
+    
     const reservation = new Reservation({
       from: req.body.from,
       to: req.body.to,

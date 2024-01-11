@@ -3,7 +3,7 @@ import { CourtModel } from "@/model/courtModel"
 import { CourtService } from "@/service/courtService"
 import { useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { PATH_ROOT } from "@/components/MainRouter"
+import { PATH_RESERVATION, PATH_ROOT } from "@/components/MainRouter"
 import Court from "@/components/courts/Court"
 import LoadingDots from "@/components/LoadingDots"
 import DatePicker from 'react-date-picker'
@@ -40,10 +40,10 @@ const CourtList = () => {
 
   return (
     <div className="flex flex-col items-center w-full">
-      <div className="flex justify-between w-full max-w-6xl">
+      <div className="flex justify-between w-full max-w-6xl my-6">
         <DatePicker onChange={setDatePickerValue} value={datePickerValue} clearIcon={null} className="mx-4" />
         <button className="px-4 mx-4 border-none rounded-sm bg-gray-200 cursor-pointer font-montserrat font-bold hover:bg-lime-300"
-          onClick={() => console.log('make a reservation')}>Make a Reservation</button>
+          onClick={() => navigate(PATH_RESERVATION)}>Make a Reservation</button>
       </div>
       {!loading ?
       <table className="table-auto w-full max-w-6xl overflow-x-scroll">
