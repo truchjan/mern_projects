@@ -7,6 +7,23 @@ export namespace CourtService {
 
   const api = process.env.NODE_ENV === 'development' ? 'http://localhost:3000/api/courts' : 'https://...j7i.onrender.com/api/courts'
 
+  export async function courtDetailByNumber(number: number): Promise<CourtModel | null> {
+    try {
+      const response = await fetch(`${api}/${number}`, {
+        headers: {
+          'Authorization': `Bearer ${getAccessToken()}`
+        },
+        credentials: 'include'
+      })
+
+      if(response.status === 403) return null
+
+      return response.json()
+    } catch(error) {
+      return null
+    }
+  }
+
   export async function courtList(): Promise<CourtModel[]> {
     try {
       const response = await fetch(`${api}`, {

@@ -7,9 +7,9 @@ exports.courtList = asyncHandler(async (req, res, next) => {
   res.json(courts)
 })
 
-exports.courtDetail = asyncHandler(async (req, res, next) => {
+exports.courtDetailByNumber = asyncHandler(async (req, res, next) => {
   try {
-    const court = await Court.findById(req.params.id).populate("reservations")
+    const court = await Court.findOne({number: req.params.number}).populate("reservations")
     if(court) {
       res.json(court)
     } else {

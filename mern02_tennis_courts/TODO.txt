@@ -1,12 +1,11 @@
 DELETE this file after completion
 
-souhrn
-1. existuje možnost zrušit rezervaci 24h předem
-2. bude chodit potvrzovací/rušící email - optional
+full stack
+1. update and delete reservations - only possible 2 days before
+2. reservation email confirmation - optional
 
 backend
-1. při tvorbě/aktualizace rezervace se kontroluje zda rezervace v tomto čase již neexistuje
+1. ???
 
 frontend
-1. zahezkat vše - především login
-2. na profile stránce implementovat tlačítka update/delete reservation - nelze pokud je blíže než za 24h/už proběhla
+1. beautify
