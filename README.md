@@ -1,5 +1,5 @@
 # mern projects
-This repository contiains some exemplary projects created using MERN stack.
+This repository contains some exemplary projects created using MERN stack.
 
 Currently the Fakebook project is finished, Tennis Courts are in development and more projects will follow.
 
