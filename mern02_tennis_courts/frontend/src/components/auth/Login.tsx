@@ -57,9 +57,9 @@ const Login = () => {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
+    <div className="flex flex-col items-center justify-center h-screen bg-gradient-to-r from-lime-100 to-green-200">
       {!loading ? 
-      <div className="flex flex-col p-4 items-center shadow-[0_0_10px_3px_rgb(0,0,0,0.3)] rounded-sm max-w-lg w-1/2">
+      <div className="flex flex-col p-4 items-center shadow-[0_0_10px_3px_rgb(0,0,0,0.3)] rounded-sm max-w-lg w-1/2 bg-white">
 
         <h1 className="mb-4">Tennis Courts</h1>
         <h3 className="mb-0">{isSignup ? 'Sign up' : 'Log in'}</h3>
