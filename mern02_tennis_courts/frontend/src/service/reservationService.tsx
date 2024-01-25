@@ -4,7 +4,7 @@ import { CourtService } from "@/service/courtService"
 // TODO fix onrender site
 export namespace ReservationService {
 
-  const api = process.env.NODE_ENV === 'development' ? 'http://localhost:3000/api/reservations' : 'https://....onrender.com/api/reservations'
+  const api = process.env.NODE_ENV === 'development' ? 'http://localhost:3000/api/reservations' : 'https://tennis-courts-api.onrender.com/api/reservations'
 
   export async function createReservation(userId: string, courtNumber: number, from: Date, to: Date): Promise<Response> {
 

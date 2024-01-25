@@ -5,7 +5,7 @@ import { getAccessToken } from "@/utils/accessTokenStorage"
 // TODO fix render.com api
 export namespace CourtService {
 
-  const api = process.env.NODE_ENV === 'development' ? 'http://localhost:3000/api/courts' : 'https://...j7i.onrender.com/api/courts'
+  const api = process.env.NODE_ENV === 'development' ? 'http://localhost:3000/api/courts' : 'https://tennis-courts-api.onrender.com/api/courts'
 
   export async function courtDetailByNumber(number: number): Promise<CourtModel | null> {
     try {

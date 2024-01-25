@@ -5,7 +5,7 @@ import { getAccessToken } from "@/utils/accessTokenStorage"
 export namespace UserService {
 
   // todo fix render site name
-  const api = process.env.NODE_ENV === 'development' ? 'http://localhost:3000/api/users' : 'https://.....onrender.com/api/users'
+  const api = process.env.NODE_ENV === 'development' ? 'http://localhost:3000/api/users' : 'https://tennis-courts-api.onrender.com/api/users'
 
   export async function userDetail(id: string): Promise<UserModel | null> {
     try {
