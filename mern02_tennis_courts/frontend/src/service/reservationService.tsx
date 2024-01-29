@@ -48,18 +48,18 @@ export namespace ReservationService {
   //   }
   // }
 
-  // export async function deleteReservation(reservationId: string) {
-  //   try {
-  //     await fetch(`${api}/${reservationId}`, {
-  //       method: 'DELETE',
-  //       headers: {
-  //         'Authorization': `Bearer ${getAccessToken()}`
-  //       },
-  //       credentials: 'include'
-  //     })
+  export async function deleteReservation(reservationId: string) {
+    try {
+      await fetch(`${api}/${reservationId}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${getAccessToken()}`
+        },
+        credentials: 'include'
+      })
 
-  //   } catch(error) {
-  //     return
-  //   }
-  // }
+    } catch(error) {
+      return
+    }
+  }
 }

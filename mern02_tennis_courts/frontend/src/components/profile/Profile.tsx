@@ -21,9 +21,9 @@ const Profile = () => {
 
   useEffect(() => {
     if(localStorage.getItem('loggedIn') === 'false') navigate(PATH_ROOT)
-    if(authContext?.loggedUser?._id !== params.userId) navigate(PATH_COURTS)
     if(authContext?.authenticated) {
       UserService.userDetail(params.userId!).then(item => {
+        if(authContext?.loggedUser?._id !== params.userId) navigate(PATH_COURTS)
         setUser(item)
         setLoading(false)
       })

@@ -2,6 +2,8 @@ import { ReservationModel } from "@/model/reservationModel"
 import { getDay, getMonth, getYear, getTime } from "@/utils/dateFormatter"
 import { FaPen } from "react-icons/fa"
 import { IoMdCloseCircle } from "react-icons/io"
+import { ReservationService } from "@/service/reservationService"
+import { toast } from "react-toastify"
 
 // TODO - reservations a setReservations se bude hodit pro updatování a deletování rezervací - pak budu moct promítnout změnu
 interface ReservationProps {
@@ -11,6 +13,14 @@ interface ReservationProps {
 }
 
 const Reservation = (props: ReservationProps) => {
+
+  function deleteReservation(reservationId: string) {
+    ReservationService.deleteReservation(reservationId).then(() => {
+      props.setReservations!(props.reservations!.filter(item => item._id !== reservationId))
+      toast.warning("Reservation deleted")
+    })
+  }
+
   return (
     <div className="flex justify-between w-full max-w-2xl mb-4 rounded-sm border border-solid">
       <div className="flex">
@@ -30,7 +40,7 @@ const Reservation = (props: ReservationProps) => {
         <FaPen className="text-sky-600 cursor-pointer hover:text-lime-300 p-2"
           onClick={() => console.log('Update reservation')} />
         <IoMdCloseCircle className="text-rose-600 text-xl cursor-pointer hover:text-lime-300 p-2"
-          onClick={() => console.log('Delete reservation')} />
+          onClick={() => deleteReservation(props.reservation._id!)} />
       </div>
 
       
