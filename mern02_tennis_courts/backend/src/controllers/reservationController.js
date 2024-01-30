@@ -50,12 +50,13 @@ exports.updateReservation = asyncHandler(async (req, res, next) => {
   try {
     const reservationExists = await Reservation.find({court: req.body.court, from: req.body.from})
     if(reservationExists.length > 0) {
-      throw new Error("Reservation at this time already exists")
+      throw new Error("Reservation at this time and court already exists")
     }
     
     const reservation = new Reservation({
       from: req.body.from,
       to: req.body.to,
+      court: req.body.court,
       _id: req.params.id
     })
     const updatedReservation = await Reservation.findByIdAndUpdate(req.params.id, reservation, {new: true, runValidators: true})

@@ -33,7 +33,7 @@ const MainRouter = () => {
           element: <ProfileForm />
         },
         {
-          path: PATH_RESERVATION,
+          path: `${PATH_RESERVATION}/:reservationId?`,
           element: <ReservationForm />
         }
       ]

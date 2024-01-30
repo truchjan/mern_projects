@@ -2,7 +2,6 @@ import { CourtModel } from "@/model/courtModel"
 import { ReservationModel } from "@/model/reservationModel"
 import { getAccessToken } from "@/utils/accessTokenStorage"
 
-// TODO fix render.com api
 export namespace CourtService {
 
   const api = process.env.NODE_ENV === 'development' ? 'http://localhost:3000/api/courts' : 'https://tennis-courts-api.onrender.com/api/courts'
