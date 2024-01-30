@@ -1,14 +1,15 @@
 import { useContext, useEffect, useState } from "react"
 import { Controller, useForm } from "react-hook-form"
 import DatePicker from "react-date-picker"
-import { buildDate, getDateFromDatePickerValue } from "@/utils/dateFormatter"
+import { buildDate, getDateFromDatePickerValue, getHour } from "@/utils/dateFormatter"
 import ReactSelect from "react-select"
 import { AuthContext } from "@/context/AuthContext"
 import { ReservationService } from "@/service/reservationService"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { PATH_COURTS } from "@/components/MainRouter"
 import { timeOptions, courtOptions } from "@/components/reservation/utils/reservationOptions"
 import { toast } from "react-toastify"
+import { ReservationModel } from "@/model/reservationModel"
 
 type DatePickerValuePiece = Date | null
 type DatePickerValue = DatePickerValuePiece | [DatePickerValuePiece, DatePickerValuePiece]
@@ -17,15 +18,19 @@ const ReservationForm = () => {
 
   const authContext = useContext(AuthContext)
   const navigate = useNavigate()
+  const params = useParams()
 
-  const [datePickerValue, setDatePickerValue] = useState<DatePickerValue>(new Date())  
+  const [reservationToUpdate, setReservationToUpdate] = useState<ReservationModel | null>()
 
-  // TODO - až budu přídávat update, tak tady rozlišovat mezi novou a updatovanou default hodnotou
+  const [datePickerValue, setDatePickerValue] = useState<DatePickerValue>(new Date())
+  const [formTime, setFormTime] = useState(timeOptions[0])
+  const [formCourtNumber, setFormCourtNumber] = useState(courtOptions[0])
+
   const {handleSubmit, setValue, control} = useForm({
     defaultValues: {
       date: getDateFromDatePickerValue(datePickerValue),
-      time: timeOptions[0].value,
-      courtNumber: courtOptions[0].value
+      time: formTime?.value,
+      courtNumber: formCourtNumber?.value
     }
   })
 
@@ -33,28 +38,52 @@ const ReservationForm = () => {
     setValue("date", getDateFromDatePickerValue(datePickerValue))
   }, [datePickerValue])
 
-  // FOR UPDATE - later
-  // useEffect(() => {
-  //   if(props.update) {
-  //     // reservationId bude nepovinný prop
-  //     ReservationService.reservationDetail(props.reservationId).then(item => {
-  //       setValue("name", item?.name!)
-  //       setUser(item)
-  //     })
-  //   }
-  // }, [])
+  useEffect(() => {
+    if(authContext?.authenticated && params.reservationId) {
+      ReservationService.reservationDetail(params.reservationId).then(item => {
+        setReservationToUpdate(item)
+      })
+    }
+  }, [authContext?.authenticated])
+
+  useEffect(() => {
+    if(params.reservationId) {
+      const time = timeOptions.find(item => item.value === getHour(reservationToUpdate?.from!))!
+      const courtNumber = courtOptions.find(item => item.value === reservationToUpdate?.court?.number!.toString())!
+
+      setFormTime(time)
+      setValue("time", time?.value)
+      setFormCourtNumber(courtNumber)
+      setValue("courtNumber", courtNumber?.value)
+
+      reservationToUpdate && setDatePickerValue(new Date(reservationToUpdate?.from!))
+    }
+  }, [reservationToUpdate])
 
   const onSubmit = (data: any) => {
-    ReservationService.createReservation(authContext?.loggedUser?._id!, data.courtNumber,
-      buildDate(data.date, data.time), buildDate(data.date, (Number(data.time) + 1).toString())).then(item => {
-        if(item.status === 200) {
-          toast.success('Reservation created')
-          navigate(PATH_COURTS)
-        } else {
-          let errorStr = ''
-          item.json().then(err => errorStr = err.message).then(() => toast.error(errorStr))
-        }
+    if(!params.reservationId) {
+      ReservationService.createReservation(authContext?.loggedUser?._id!, data.courtNumber,
+        buildDate(data.date, data.time), buildDate(data.date, (Number(data.time) + 1).toString())).then(item => {
+          if(item.status === 200) {
+            toast.success('Reservation created')
+            navigate(PATH_COURTS)
+          } else {
+            let errorStr = ''
+            item.json().then(err => errorStr = err.message).then(() => toast.error(errorStr))
+          }
       })
+    } else {
+      ReservationService.updateReservation(params.reservationId, data.courtNumber,
+        buildDate(data.date, data.time), buildDate(data.date, (Number(data.time) + 1).toString())).then(item => {
+          if(item.status === 200) {
+            toast.success('Reservation updated')
+            navigate(PATH_COURTS)
+          } else {
+            let errorStr = ''
+            item.json().then(err => errorStr = err.message).then(() => toast.error(errorStr))
+          }
+      })
+    }
   }
 
   return (
@@ -81,8 +110,11 @@ const ReservationForm = () => {
               <Controller control={control} name="time"
                 render={() => (
                   <ReactSelect className={"p-2 col-span-3 font-montserrat rounded-sm border-2"}
-                    options={timeOptions} defaultValue={timeOptions[0]}
-                    onChange={data => setValue("time", data!.value)}
+                    options={timeOptions} value={formTime}
+                    onChange={data => {
+                      setValue("time", data!.value)
+                      setFormTime(data!)
+                    }}
                   />
                 )}
               />
@@ -91,8 +123,11 @@ const ReservationForm = () => {
               <Controller control={control} name="courtNumber"
                 render={() => (
                   <ReactSelect className={"p-2 col-span-3 font-montserrat rounded-sm border-2"}
-                    options={courtOptions} defaultValue={courtOptions[0]}
-                    onChange={data => setValue("courtNumber", data!.value)}
+                    options={courtOptions} value={formCourtNumber}
+                    onChange={data => {
+                      setValue("courtNumber", data!.value)
+                      setFormCourtNumber(data!)
+                    }}
                   />
                 )}
               />

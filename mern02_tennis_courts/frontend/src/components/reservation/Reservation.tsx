@@ -4,8 +4,9 @@ import { FaPen } from "react-icons/fa"
 import { IoMdCloseCircle } from "react-icons/io"
 import { ReservationService } from "@/service/reservationService"
 import { toast } from "react-toastify"
+import { useNavigate } from "react-router-dom"
+import { PATH_RESERVATION } from "@/components/MainRouter"
 
-// TODO - reservations a setReservations se bude hodit pro updatování a deletování rezervací - pak budu moct promítnout změnu
 interface ReservationProps {
   reservation: ReservationModel,
   reservations?: ReservationModel[] | undefined,
@@ -13,6 +14,8 @@ interface ReservationProps {
 }
 
 const Reservation = (props: ReservationProps) => {
+
+  const navigate = useNavigate()
 
   function deleteReservation(reservationId: string) {
     ReservationService.deleteReservation(reservationId).then(() => {
@@ -38,7 +41,7 @@ const Reservation = (props: ReservationProps) => {
 
       <div className="flex flex-col justify-center items-center mr-4">
         <FaPen className="text-sky-600 cursor-pointer hover:text-lime-300 p-2"
-          onClick={() => console.log('Update reservation')} />
+          onClick={() => navigate(`${PATH_RESERVATION}/${props.reservation._id}`)} />
         <IoMdCloseCircle className="text-rose-600 text-xl cursor-pointer hover:text-lime-300 p-2"
           onClick={() => deleteReservation(props.reservation._id!)} />
       </div>

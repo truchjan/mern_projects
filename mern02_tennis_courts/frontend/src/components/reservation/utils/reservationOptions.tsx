@@ -1,7 +1,7 @@
 export const timeOptions = [
-  { value: "7", label: "07:00" },
-  { value: "8", label: "08:00" },
-  { value: "9", label: "09:00" },
+  { value: "07", label: "07:00" },
+  { value: "08", label: "08:00" },
+  { value: "09", label: "09:00" },
   { value: "10", label: "10:00" },
   { value: "11", label: "11:00" },
   { value: "12", label: "12:00" },
