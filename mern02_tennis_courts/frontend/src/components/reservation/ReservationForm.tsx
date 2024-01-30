@@ -91,7 +91,7 @@ const ReservationForm = () => {
       <div className="p-4 h-1/2 max-h-xl w-3/4 max-w-xl bg-white rounded-lg">
 
         <div className="flex flex-col items-center mx-4">
-          <h1>Create Reservation</h1>
+          <h1>{params.reservationId ? 'Update' : 'Create'} reservation</h1>
           <form onSubmit={handleSubmit(onSubmit)} className="w-full">
 
 
@@ -136,7 +136,7 @@ const ReservationForm = () => {
 
             <div className="flex justify-center">
               <button type="submit" className={"mt-8 mb-4 w-20 h-8 border-none rounded-sm bg-gray-200 cursor-pointer font-montserrat font-bold hover:bg-lime-300"}>
-                Create
+                {params.reservationId ? 'Update' : 'Create'}
               </button>
             </div>
 
