@@ -31,7 +31,7 @@ const AppNavbar = () => {
       <div className="mt-20">
         <Outlet />
       </div>
-      <ToastContainer autoClose={3000} />
+      <ToastContainer autoClose={2000} />
     </div>
   )
 }
