@@ -65,18 +65,15 @@ export namespace ReservationService {
     return response
   }
 
-  export async function deleteReservation(reservationId: string) {
-    try {
-      await fetch(`${api}/${reservationId}`, {
-        method: 'DELETE',
-        headers: {
-          'Authorization': `Bearer ${getAccessToken()}`
-        },
-        credentials: 'include'
-      })
+  export async function deleteReservation(reservationId: string): Promise<Response> {
+    const response = await fetch(`${api}/${reservationId}`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${getAccessToken()}`
+      },
+      credentials: 'include'
+    })
 
-    } catch(error) {
-      return
-    }
+    return response
   }
 }
