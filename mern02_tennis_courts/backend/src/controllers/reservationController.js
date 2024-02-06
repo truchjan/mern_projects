@@ -39,6 +39,11 @@ exports.createReservation = asyncHandler(async (req, res, next) => {
       user: req.body.user,
       court: req.body.court
     })
+
+    if(reservation.from < new Date()) {
+      throw new Error("Cannot create reservation in the past")
+    }
+
     const created = await reservation.save()
     res.json(await created.populate('user court'))
   } catch(err) {
@@ -52,6 +57,11 @@ exports.updateReservation = asyncHandler(async (req, res, next) => {
     if(reservationExists.length > 0) {
       throw new Error("Reservation at this time and court already exists")
     }
+
+    const reservationCheck = await Reservation.findById(req.params.id)
+    if(reservationCheck.from < new Date()) {
+      throw new Error("Cannot update past reservations")
+    }
     
     const reservation = new Reservation({
       from: req.body.from,
@@ -59,6 +69,11 @@ exports.updateReservation = asyncHandler(async (req, res, next) => {
       court: req.body.court,
       _id: req.params.id
     })
+
+    if(reservation.from < new Date()) {
+      throw new Error("Cannot update reservation to the past")
+    }
+
     const updatedReservation = await Reservation.findByIdAndUpdate(req.params.id, reservation, {new: true, runValidators: true})
     
     if(updatedReservation) {
@@ -73,6 +88,11 @@ exports.updateReservation = asyncHandler(async (req, res, next) => {
 
 exports.deleteReservation = asyncHandler(async (req, res, next) => {
   try {
+    const reservationCheck = await Reservation.findById(req.params.id)
+    if(reservationCheck.from < new Date()) {
+      throw new Error("Cannot delete past reservations")
+    }
+
     const reservation = await Reservation.deleteOne({_id: req.params.id})
     if(reservation.deletedCount !== 0) {
       res.json(reservation)

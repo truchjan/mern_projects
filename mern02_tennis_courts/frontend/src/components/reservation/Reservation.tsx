@@ -18,9 +18,14 @@ const Reservation = (props: ReservationProps) => {
   const navigate = useNavigate()
 
   function deleteReservation(reservationId: string) {
-    ReservationService.deleteReservation(reservationId).then(() => {
-      props.setReservations!(props.reservations!.filter(item => item._id !== reservationId))
-      toast.warning("Reservation deleted")
+    ReservationService.deleteReservation(reservationId).then(response => {
+      if(response.status === 200) {
+        props.setReservations!(props.reservations!.filter(item => item._id !== reservationId))
+        toast.warning("Reservation deleted")
+      } else {
+        let errorStr = ''
+        response.json().then(err => errorStr = err.message).then(() => toast.error(errorStr))
+      }
     })
   }
 
